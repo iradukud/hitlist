@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mission creation
+    </title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h1>Create a mission</h1>
+    <form action="/missionCreation/createmission" method='POST'>
+        <input type="text" placeholder="Enter Todo Item" name='todoItem'>
+        <input type="submit">
+    </form>
+    
+    <a href="/welcome"> Homepage</a> <!-- go to task creating page -->
+    <a href="/missions"> Current Missions</a> <!-- go to look at today's objectives/task -->
+    <a href="/logout">Logout</a>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
