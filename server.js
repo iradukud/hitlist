@@ -8,9 +8,9 @@ const flash = require('express-flash')
 const logger = require('morgan')
 const connectDB = require('./config/database')
 const mainRoutes = require('./routes/main')
-//const todoRoutes = require('./routes/todos')
+const missionRoutes = require('./routes/missions')
 
-require('dotenv').config({path: './config/.env'})
+require('dotenv').config({ path: './config/.env' })
 
 // Passport config
 require('./config/passport')(passport)
@@ -24,23 +24,23 @@ app.use(express.json())
 app.use(logger('dev'))
 // Sessions
 app.use(
-    session({
-      secret: 'keyboard cat',
-      resave: false,
-      saveUninitialized: false,
-      store: new MongoStore({ mongooseConnection: mongoose.connection }),
-    })
-  )
-  
+  session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+  })
+)
+
 // Passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
 
 app.use(flash())
-  
+
 app.use('/', mainRoutes)
-//app.use('/todos', todoRoutes)
- 
-app.listen(process.env.PORT, ()=>{
-    console.log('Server is running, you better catch it!')
+app.use('/mission', missionRoutes)
+
+app.listen(process.env.PORT, () => {
+  console.log('Server is running, you better catch it!')
 })    

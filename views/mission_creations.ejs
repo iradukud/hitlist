@@ -1,24 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mission creation
+    <title>Planning phase
     </title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    <h1>Create a mission</h1>
-    <form action="/missionCreation/createmission" method='POST'>
-        <input type="text" placeholder="Enter Todo Item" name='todoItem'>
+    <h1>Planning Phase</h1>
+    <form action="/mission/createMission" method='POST'>
+        <label for="mission">Mission name:</label>
+        <input type="text" placeholder="Enter mission name" name='mission'>
+        <label for="date">Mission date:</label>
+        <input type="date" name='date'>
+        <label for="importance">Importance level:</label>
+        <select name="importance" id="cars">
+            <option value="1">High</option>
+            <option value="2">Medium</option>
+            <option value="3">Low</option>
+        </select>
+        <label for="missionTasks">Mission tasks:</label>
+        <input type="textarea" placeholder="Enter all mission tasks, seperated comma" name='missionTasks'>
         <input type="submit">
     </form>
-    
+
     <a href="/welcome"> Homepage</a> <!-- go to task creating page -->
     <a href="/missions"> Current Missions</a> <!-- go to look at today's objectives/task -->
     <a href="/logout">Logout</a>
 
     <script src="js/main.js"></script>
 </body>
+
 </html>

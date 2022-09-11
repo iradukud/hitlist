@@ -3,9 +3,15 @@ const router = express.Router()
 const missionsController = require('../controllers/missions') 
 const { ensureAuth } = require('../middleware/auth')
 
-//router.get('/', ensureAuth, todosController.getTodos)
+router.post('/createMission', missionsController.createMission)
 
-//router.post('/createMission', todosController.createTodo)
+
+
+
+
+
+module.exports = router
+//router.get('/', ensureAuth, todosController.getTodos)
 
 //router.put('/markComplete', todosController.markComplete)
 
