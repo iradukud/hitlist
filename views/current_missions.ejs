@@ -10,21 +10,27 @@
 </head>
 
 <body>
-    <h1>Today's missions</h1>
-    <!-- <ul>
-        <% todos.forEach( el=> { %>
-            <li class='todoItem' data-id='<%=el._id%>'>
-                <span class='<%= el.completed === true ? ' completed' : 'not' %>'><%= el.todo %></span>
-                <span class='del'> Delete </span>
-            </li>
-            <% }) %>
-    </ul>
+    <h1>Missions for <%= new Date() %></h1>
 
-    <h2>
-        <%= user.userName %> has <%= left %> things left to do.
-    </h2>
--->
-<a href="/welcome"> Current Homepage</a> <!-- go to welcome page -->
+    <% missions.forEach( item => { %>
+    <div>
+        <h3>Mission <%= item.mission %></h3>
+        <h6>Mission ID: <%= item._id %></h6>
+    </div>
+    <% item.tasks.forEach(tasks=>{%>
+        <div>
+            <li class='tas'>
+                <span class='<%= tasks.completed === true ? 'completed' : 'not'%>'><%= tasks.task %></span>
+            </li>
+        </div>
+    <% })%>
+
+
+
+    <% }) %>
+
+
+<a href="/welcome"> Homepage</a> <!-- go to welcome page -->
 <a href="/create"> Create mission</a> <!-- go to task creating page -->
 <a href="/logout">Logout</a>
 

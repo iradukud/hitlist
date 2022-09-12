@@ -11,7 +11,6 @@ router.post('/createMission', missionsController.createMission)
 
 
 module.exports = router
-//router.get('/', ensureAuth, todosController.getTodos)
 
 //router.put('/markComplete', todosController.markComplete)
 
