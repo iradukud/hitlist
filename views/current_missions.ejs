@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daily missions</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 </head>
 
 <body>
@@ -17,18 +19,16 @@
         <h3>Mission <%= item.mission %></h3>
         <h6>Mission ID: <%= item._id %></h6>
     </div>
+    <div>
     <% item.tasks.forEach(tasks=>{%>
-        <div>
-            <li class='tas'>
+        
+            <li class='task' data-id='<%= item._id %>'>
                 <span class='<%= tasks.completed === true ? 'completed' : 'not'%>'><%= tasks.task %></span>
             </li>
-        </div>
+
     <% })%>
-
-
-
+    </div>
     <% }) %>
-
 
 <a href="/welcome"> Homepage</a> <!-- go to welcome page -->
 <a href="/create"> Create mission</a> <!-- go to task creating page -->

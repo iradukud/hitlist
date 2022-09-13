@@ -9,7 +9,7 @@ module.exports = {
                 date: req.body.date,
                 importance: req.body.importance,
                 tasks: req.body.missionTasks.split(',').map(x => {
-                    return { 'task': x, 'completed': false }
+                    return { 'task': x.trim(), 'completed': false }
                 }),
                 userId: req.user.id
             })
@@ -18,12 +18,43 @@ module.exports = {
         } catch (err) {
             console.log(err)
         }
+    },
+    //Marks mission as completed: true in DB
+    markComplete: async (req, res) => {
+        //console.log( req.body.missionIdFromJSFile)
+        //console.log( req.body.task)
+        try {
+            await Mission.findOneAndUpdate({ _id: req.body.missionIdFromJSFile }, {
+                $set: { 'tasks.$[i].completed': true }
+            }, {
+                arrayFilters: [{ 'i.task': req.body.task }]
+            })
+            console.log('Marked Complete')
+            res.json('Marked complete')
+        } catch (err) {
+            console.log(err)
+        }
+    },
+    //Marks mission as completed: true in DB
+    markIncomplete: async (req, res) => {
+        try {
+            await Mission.findOneAndUpdate({ _id: req.body.missionIdFromJSFile }, {
+                $set: { 'tasks.$[i].completed': false }
+            }, {
+                arrayFilters: [{ 'i.task': req.body.task }]
+            })
+            console.log('Marked Incomplete')
+            res.json('Marked Incomplete')
+        } catch (err) {
+            console.log(err)
+        }
     }
 }
 
 
+
+
+
 //delete mission
-//mission complete
-//mission uncomplete
 
 //extra --> edit mission
