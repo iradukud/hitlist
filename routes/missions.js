@@ -6,14 +6,8 @@ const { ensureAuth } = require('../middleware/auth')
 router.post('/createMission', missionsController.createMission)
 router.put('/markComplete', missionsController.markComplete)
 router.put('/markIncomplete', missionsController.markIncomplete)
-
-
-
-
+router.delete('/deleteTask', missionsController.deleteTask)
+router.delete('/deleteMission', missionsController.deleteMission)
 
 
 module.exports = router
-
-//router.delete('/deleteMission', todosController.deleteTodo)
-
-//module.exports = router

@@ -15,18 +15,20 @@ integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7
     <h1>Missions for <%= new Date() %></h1>
 
     <% missions.forEach( item => { %>
-    <div>
-        <h3>Mission <%= item.mission %></h3>
-        <h6>Mission ID: <%= item._id %></h6>
-    </div>
+        <% const taskIncomplete = item.tasks.filter(x=> x.completed==false).length %>
+        
+        <section data-id='<%= item._id %>'>    
+        <h3>Mission: <%= item.mission %></h3>
+        <span class='delMission'>Delete</span>
+        </section>
     <div>
     <% item.tasks.forEach(tasks=>{%>
-        
             <li class='task' data-id='<%= item._id %>'>
                 <span class='<%= tasks.completed === true ? 'completed' : 'not'%>'><%= tasks.task %></span>
+                <span class='deltask'> Delete </span>
             </li>
-
     <% })%>
+    <h6>Tasks left in the mission <%= taskIncomplete%></h6>
     </div>
     <% }) %>
 

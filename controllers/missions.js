@@ -1,8 +1,8 @@
 const Mission = require('../models/mission')
 
 module.exports = {
+    //Create a mission, with task
     createMission: async (req, res) => {
-        //Create a Mission
         try {
             await Mission.create({
                 mission: req.body.mission,
@@ -19,7 +19,7 @@ module.exports = {
             console.log(err)
         }
     },
-    //Marks mission as completed: true in DB
+    //Marks task in mission as completed: true in DB
     markComplete: async (req, res) => {
         //console.log( req.body.missionIdFromJSFile)
         //console.log( req.body.task)
@@ -35,7 +35,7 @@ module.exports = {
             console.log(err)
         }
     },
-    //Marks mission as completed: true in DB
+    //Marks task in mission as completed: false in DB
     markIncomplete: async (req, res) => {
         try {
             await Mission.findOneAndUpdate({ _id: req.body.missionIdFromJSFile }, {
@@ -48,13 +48,31 @@ module.exports = {
         } catch (err) {
             console.log(err)
         }
+    },
+    //Deletes a task in mission  
+    deleteTask: async (req, res) => {
+        try {
+            await Mission.findOneAndUpdate({ _id: req.body.missionIdFromJSFile }, {
+                $pull: { tasks: { task: req.body.task } }
+            }, {
+                multi: true
+            })
+            console.log('Deleted mission task')
+            res.json('Deleted It')
+        } catch (err) {
+            console.log(err)
+        }
+    },
+    //Delete the whole mission  
+    deleteMission: async (req, res)=>{
+        console.log(req.body.missionIdFromJSFile)
+        try{
+            await Mission.findOneAndDelete({_id:req.body.missionIdFromJSFile})
+            console.log('Deleted Mission')
+            res.json('Deleted It')
+        }catch(err){
+            console.log(err)
+        }
     }
 }
-
-
-
-
-
-//delete mission
-
 //extra --> edit mission
