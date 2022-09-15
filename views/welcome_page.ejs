@@ -1,19 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agent Homepage</title>
+	<title>Agent Homepage</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="/css/main.css" />
+	<noscript>
+		<link rel="stylesheet" href="/css/noscript.css" />
+	</noscript>
 </head>
 
-<body>
-    <h1>Welcome agent <%= user.userName %></h1>
-    <p>Select a folder</p>
-    <a href="/create"> Create mission</a> <!-- go to task creating page -->
-    <a href="/missions"> Current Missions</a> <!-- go to look at today's objectives/task -->
-    <a href="/logout">Logout</a>
+<body class="is-preload">
+	<!-- Page Wrapper -->
+	<div id="page-wrapper">
+
+		<!-- Header -->
+		<header id="header" class="alt">
+			<h1><a href="/">
+					<h1>Hitlist</h1>
+				</a></h1>
+			<!--link back to homepage/welcome page-->
+			<nav>
+				<a href="#menu">Menu</a>
+			</nav>
+		</header>
+
+		<!-- Menu -->
+		<nav id="menu">
+			<div class="inner">
+				<h2>Menu</h2>
+				<ul class="links">
+					<li><a href="/create"> Create mission</a></li>
+					<li><a href="/missions"> Current Missions</a></li>
+					<li><a href="/logout">Logout</a></li>
+				</ul>
+				<a href="#" class="close">Close</a>
+			</div>
+		</nav>
+
+		<!-- Banner -->
+		<section id="banner">
+			<div class="inner">
+				<div class="logo"><span class="icon fa-user"></span></div>
+				<h2>Welcome agent <%= user.userName %>
+				</h2>
+				<p>Select a folder</a></p>
+				<ul class="actions">
+					<li><a href="/create" class="button primary"> Create mission</a></li>
+					<li><a href="/missions" class="button"> Current Missions</a></li>
+				</ul>
+			</div>
+		</section>
+
+		<!-- Footer -->
+		<section id="footer">
+			<div class="inner">
+				<ul class="copyright">
+					<li>All rights reserved.</a></li>
+					<li>&copy; <a href="https://daviradprofile.netlify.app">DavidIradukunda</a></li>
+				</ul>
+			</div>
+		</section>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/jquery.scrollex.min.js"></script>
+	<script src="/js/browser.min.js"></script>
+	<script src="/js/breakpoints.min.js"></script>
+	<script src="/js/util.js"></script>
+	<script src="/js/menu.js"></script>
+
 </body>
 
 </html>

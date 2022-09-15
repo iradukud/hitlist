@@ -83,7 +83,7 @@ async function deleteTask(){
 
 //acquires the data necessary to delete the whole mission and sends it to the appropriate router-controller
 async function deleteMission(){
-    const missionId = this.parentNode.dataset.id
+    const missionId = this.parentNode.parentNode.dataset.id
     try{
         const response = await fetch('mission/deleteMission', {
             method: 'delete',
