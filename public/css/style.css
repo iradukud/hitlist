@@ -1,0 +1,61 @@
+/* Pop up box */
+.pop-up-container {
+     background-color: rgba(0, 0, 0, .4);
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     position: fixed;
+     opacity: 0;
+     pointer-events: none;
+     top: 0;
+     left: 0;
+     height: 100vh;
+     width: 100vw;
+     z-index: 1;
+}
+
+.pop-up-container.show,
+.dayBoxBubble.show,
+.dayBoxPointer.show,
+.dateError.show {
+     pointer-events: auto;
+     opacity: 1;
+     transition: opacity 0.2s ease;
+}
+
+.pop-up-container.show {
+     transition: opacity 0.3s ease;
+}
+
+.pop-up {
+     background-color: rgba(0, 0, 0, .8);
+     border-radius: 5px;
+     box-shadow: 0 3px 20px rgba(255, 255, 255, .05);
+     padding: 2rem 3rem 3.5rem 3rem;
+     width: 35vw;
+     max-width: 100%;
+     text-align: center;
+}
+
+/* Task completion indicator */
+.completed {
+     text-decoration: line-through;
+     color: gray;
+}
+
+.not {
+     color: pink;
+}
+
+/* Mission importance color codeing */
+.high {
+     color: red;
+}
+
+.medium {
+     color: orange;
+}
+
+.low {
+     color: green;
+}

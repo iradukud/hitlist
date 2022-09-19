@@ -1,7 +1,7 @@
 const Mission = require('../models/mission')
 
 module.exports = {
-    //Create a mission, with task
+    //Create a mission with tasks
     createMission: async (req, res) => {
         try {
             await Mission.create({
@@ -22,7 +22,7 @@ module.exports = {
     //Marks task in mission as completed: true in DB
     markComplete: async (req, res) => {
         //console.log( req.body.missionIdFromJSFile)
-        //console.log( req.body.task)
+        console.log(req.body)
         try {
             await Mission.findOneAndUpdate({ _id: req.body.missionIdFromJSFile }, {
                 $set: { 'tasks.$[i].completed': true }
@@ -37,6 +37,7 @@ module.exports = {
     },
     //Marks task in mission as completed: false in DB
     markIncomplete: async (req, res) => {
+        console.log(req.body)
         try {
             await Mission.findOneAndUpdate({ _id: req.body.missionIdFromJSFile }, {
                 $set: { 'tasks.$[i].completed': false }
@@ -64,15 +65,58 @@ module.exports = {
         }
     },
     //Delete the whole mission  
-    deleteMission: async (req, res)=>{
+    deleteMission: async (req, res) => {
         console.log(req.body.missionIdFromJSFile)
-        try{
-            await Mission.findOneAndDelete({_id:req.body.missionIdFromJSFile})
-            console.log('Deleted Mission')
-            res.json('Deleted It')
-        }catch(err){
+        try {
+            await Mission.findOneAndDelete({ _id: req.body.missionIdFromJSFile })
+            console.log('Deleted mission')
+            res.json('Deleted it')
+        } catch (err) {
             console.log(err)
         }
+    },
+    //Edits a mission data except the tasks  
+    editMission: async (req, res) => {
+        console.log(req.body)
+        try {
+            await Mission.findOneAndUpdate({ _id: req.body.id }, {
+                mission: req.body.mission,
+                date: req.body.date,
+                importance: req.body.importance
+            })
+            console.log('Mission edited')
+            res.redirect("/missions")
+        } catch (err) {
+            res.redirect("/missions");
+        }
+    },
+    //Edits a the selected task in the mission  
+    editTask: async (req, res) => {
+        console.log(req.body)
+        try {
+            await Mission.findOneAndUpdate({ _id: req.body.id }, {
+                $set: { 'tasks.$[i].task': req.body.task }
+            }, {
+                arrayFilters: [{ 'i.task': req.body.taskValue }]
+            })
+            console.log('task edited')
+            res.redirect("/missions")
+        } catch (err) {
+            res.redirect("/missions");
+        }
+    },
+    //Adds a new task to the mission
+    addTask: async (req, res) => {
+        console.log(req.body)
+        try {
+            await Mission.findOneAndUpdate({ _id: req.body.id }, {
+                $push: { tasks: { task: req.body.task, completed: false } }
+            })
+            console.log('task add')
+            res.redirect("/missions")
+        } catch (err) {
+            res.redirect("/missions");
+        }
+
     }
 }
-//extra --> edit mission

@@ -2,93 +2,96 @@
 <html>
 
 <head>
-	<title>Creation Phase</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="/css/main.css" />
-	<noscript>
-		<link rel="stylesheet" href="/css/noscript.css" />
-	</noscript>
+  <title>Creation Phase</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css" />
+  </noscript>
 </head>
 
 <body class="is-preload">
-	<!-- Page Wrapper -->
-	<div id="page-wrapper">
+  <%# Page Wrapper %>
+  <div id="page-wrapper">
 
-		<!-- Header -->
-		<header id="header" class="alt">
-			<h1><a href="index.html">
-					<h1>Hitlist</h1>
-				</a></h1>
-			<nav>
-				<a href="#menu">Menu</a>
-			</nav>
-		</header>
+    <%# Header %>
+    <header id="header" class="alt">
+      <h1><a href="index.html">
+          <h1>Hitlist</h1>
+        </a></h1>
+      <%# link back to homepage/welcome page  %>
+      <nav>
+        <a href="/welcome">Menu</a>
+      </nav>
+    </header>
 
-		<!-- Menu -->
-		<nav id="menu">
-			<div class="inner">
-				<h2>Menu</h2>
-				<ul class="links">
-					<li><a href="/welcome">Homepage</a></li>
-					<li><a href="/missions">Current Missions</a></li>
-					<li><a href="/logout">Logout</a></li>
-				</ul>
-				<a href="#" class="close">Close</a>
-			</div>
-		</nav>
+    <%# Menu %>
+    <nav id="menu">
+      <div class="inner">
+        <h2>Menu</h2>
+        <ul class="links">
+          <li><a href="/welcome">Homepage</a></li>
+          <li><a href="/missions">Current Missions</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+        <a href="#" class="close">Close</a>
+      </div>
+    </nav>
 
-		<!-- Footer -->
-		<section id="footer">
-			<div class="inner">
-				<h2 class="major">Create a Mission</h2>
+    <%# Mission Creation Section %>
+    <section id="footer">
+      <div class="inner">
+        <h2 class="major">Create a Mission</h2>
 
-				<form action="/mission/createMission" method='POST'>
-					<div class="fields">
-						<div class="field">
-							<label for="mission">Mission name</label>
-							<input type="text" placeholder="Enter mission name" name='mission' />
-						</div>
-						<div class="field">
-							<label for="date">Mission date</label>
-							<input type="date" name='date'>
-						</div>
-						<div class="field">
-							<label for="importance">Importance level</label>
-							<select name="importance" id="cars">
-								<option value="1">High</option>
-								<option value="2">Medium</option>
-								<option value="3">Low</option>
-							</select>
-						</div>
-						<div class="field">
-							<label for="missionTasks">Mission tasks</label>
-							<textarea name="missionTasks"
-								placeholder="Enter all mission tasks, with a comma seperating them" rows="4"></textarea>
-						</div>
-					</div>
-					<ul class="actions">
-						<li><input type="submit" /></li>
-					</ul>
-				</form>
-			</div>
-			<div class="inner">
-				<ul class="copyright">
-					<li>All rights reserved.</a></li>
-					<li>&copy; <a href="https://daviradprofile.netlify.app">DavidIradukunda</a></li>
-				</ul>
-			</div>
-		</section>
+        <%# Mission Creation Form %>
+        <form action="/mission/createMission" method='POST'>
+          <div class="fields">
+            <div class="field">
+              <label for="mission">Mission name</label>
+              <input type="text" placeholder="Enter mission name" name='mission' required />
+            </div>
+            <div class="field">
+              <label for="date">Mission date</label>
+              <input type="date" name='date' required>
+            </div>
+            <div class="field">
+              <label for="importance">Importance level</label>
+              <select name="importance" id="cars">
+                <option value="1">High</option>
+                <option value="2">Medium</option>
+                <option value="3">Low</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="missionTasks">Mission tasks</label>
+              <textarea name="missionTasks" placeholder="Enter all mission tasks, with a comma seperating them" rows="4" required></textarea>
+            </div>
+          </div>
+          <ul class="actions">
+            <li><input type="submit" /></li>
+          </ul>
+        </form>
+      </div>
 
-	</div>
+      <%# Footer %>
+      <div class="inner">
+        <ul class="copyright">
+          <li>All rights reserved.</a></li>
+          <li>&copy; <a href="https://daviradprofile.netlify.app">DavidIradukunda</a></li>
+        </ul>
+      </div>
+    </section>
 
-	<!-- Scripts -->
-	<script src="/js/jquery.min.js"></script>
-	<script src="/js/jquery.scrollex.min.js"></script>
-	<script src="/js/browser.min.js"></script>
-	<script src="/js/breakpoints.min.js"></script>
-	<script src="/js/util.js"></script>
-	<script src="/js/menu.js"></script>
+  </div>
+
+  <%# Scripts %>
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery.scrollex.min.js"></script>
+  <script src="/js/browser.min.js"></script>
+  <script src="/js/breakpoints.min.js"></script>
+  <script src="/js/util.js"></script>
+  <script src="/js/menu.js"></script>
 
 </body>
 
