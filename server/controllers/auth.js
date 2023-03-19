@@ -2,14 +2,6 @@ const passport = require('passport')
 const validator = require('validator')
 const User = require('../models/user')
 
- exports.getLogin = (req, res) => {
-    if (req.user) {
-      return res.redirect('/welcome')
-    }
-    res.render('login', { 
-      title: 'Login'
-    })
-  }
   
   exports.postLogin = (req, res, next) => {
     const validationErrors = []
@@ -44,15 +36,6 @@ const User = require('../models/user')
       if (err) console.log('Error : Failed to destroy the session during logout.', err)
       req.user = null
       res.redirect('/')
-    })
-  }
-  
-  exports.getSignup = (req, res) => {
-    if (req.user) {
-      return res.redirect('/welcome')
-    }
-    res.render('signup', {
-      title: 'Create Account'
     })
   }
   
