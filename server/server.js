@@ -3,6 +3,7 @@ const app = express()
 const mongoose = require('mongoose')
 const passport = require('passport')
 const session = require('express-session')
+const cors = require('cors')
 const MongoStore = require('connect-mongo')(session)
 const flash = require('express-flash')
 const logger = require('morgan')
@@ -35,6 +36,9 @@ app.use(
   })
 )
 
+//enables communication with clients
+app.use(cors())
+
 // Passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
@@ -43,7 +47,7 @@ app.use(passport.session())
 app.use(flash())
 
 //Setup Routes For Which The Server Is Listening
-app.use('/api', routes)
+app.use('/', routes)
 
 //Server Running
 app.listen(process.env.PORT, () => {
