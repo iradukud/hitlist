@@ -10,7 +10,7 @@ const { ensureAuth, ensureGuest } = require('../middleware/auth')
 
 //Routes that deal with logining in
 router.post('/signup', authController.postSignup)
-router.post('/login', authController.postLogin)
+router.post('/signin', authController.postLogin)
 router.get('/logout', authController.logout)
 
 

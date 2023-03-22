@@ -41,12 +41,12 @@ export default function SignIn() {
             password: data.get('password'),
         });
 
-        axios.post('http://localhost:2121/signup', {
+        axios.post('http://localhost:2121/signin', {
             email: data.get('email'),
             password: data.get('password'),
         }).then(res => {
             console.log(res)
-            if (res.data === 'Login successful') {
+            if (res.data === 'Success! You are logged in.') {
                 window.location = "/"
             } else {
                 //maybe add error message on screen 
