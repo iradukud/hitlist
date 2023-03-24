@@ -47,7 +47,7 @@ export default function SignIn() {
         }).then(res => {
             console.log(res)
             if (res.data === 'Success! You are logged in.') {
-                window.location = "/"
+                window.location = "/missions"
             } else {
                 //maybe add error message on screen 
                 window.location = "/signin"

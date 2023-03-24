@@ -52,7 +52,7 @@ export default function SignUp() {
     }).then(res => {
       console.log(res)
       if (res.data === 'New user created') {
-        window.location = "/"
+        window.location = "/missions"
       } else {
         //maybe add error message on screen 
         window.location = "/sigup"
