@@ -3,7 +3,7 @@
 */
 const express = require('express')
 const router = express.Router()
-const missionsController = require('../controllers/missions') 
+const missionsController = require('../controllers/mission') 
 const { ensureAuth } = require('../middleware/auth')
 
 //Routes that involve task items
@@ -14,7 +14,7 @@ router.put('/editTask', missionsController.editTask)
 router.post('/addTask', missionsController.addTask)
 
 //Routes that involve mission items
-router.post('/createMission', missionsController.createMission)
+router.post('/create', missionsController.createMission)
 router.delete('/deleteMission', missionsController.deleteMission)
 router.put('/editMission', missionsController.editMission)
 

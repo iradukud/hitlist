@@ -1,4 +1,4 @@
-//imports from mui
+//imports signup component from mui
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -17,6 +17,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 //import page routing w/o sending new server request
 import { Link } from 'react-router-dom';
+//import use signin from react auth kit 
+import { useSignIn } from 'react-auth-kit';
 
 function Copyright(props) {
   return (
@@ -34,7 +36,9 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
+  const signIn = useSignIn();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
@@ -44,20 +48,32 @@ export default function SignUp() {
       confirmPassword: data.get('confirmPassword'),
     });
 
-    axios.post('http://localhost:2121/signup', {
-      userName: data.get('userName'),
-      email: data.get('email'),
-      password: data.get('password'),
-      confirmPassword: data.get('confirmPassword')
-    }).then(res => {
-      console.log(res)
-      if (res.data === 'New user created') {
-        window.location = "/missions"
+    try {
+      const res = await axios.post('http://localhost:2121/signup', {
+        userName: data.get('userName'),
+        email: data.get('email'),
+        password: data.get('password'),
+        confirmPassword: data.get('confirmPassword')
+      });
+
+      console.log(res);
+
+      signIn({
+        token: res.data.token,
+        expiresIn: 1800,
+        tokenType: 'Bearer',
+      });
+
+      if (res.data.message === 'New user create') {
+        window.location = "/missions";
       } else {
-        //maybe add error message on screen 
-        window.location = "/sigup"
-      }
-    })
+        console.log(res.data.message);
+        window.location = "/signup";
+      };
+
+    } catch (err) {
+      console.log(err)
+    };
   };
 
   return (

@@ -3,6 +3,10 @@ const Mission = require('../models/mission')
 module.exports = {
     //Create a mission with tasks
     createMission: async (req, res) => {
+        console.log('New mission information has been recieved')
+        console.log(req.body)
+        res.send('New user created');
+        /*
         try {
             await Mission.create({
                 mission: req.body.mission,
@@ -18,6 +22,7 @@ module.exports = {
         } catch (err) {
             console.log(err)
         }
+        */
     },
     //Marks task in mission as completed: true in DB
     markComplete: async (req, res) => {
