@@ -31,7 +31,6 @@ class Missions extends React.Component {
             date: this.state.date,
             importance: this.state.importance,
             task: this.state.task,
-            withCredientials:true,
         }).then(() => {
             console.log('Data has been sent to the server');
             this.resetUserInputs();

@@ -41,7 +41,7 @@ exports.postSignup = (req, res, next) => {
         };
 
         console.log('New user created');
-        res.json({ message: 'New user create', token: req.session });
+        res.json({ message: 'New user create', userID: req.session.passport.user });
       });
     });
   });
@@ -75,9 +75,8 @@ exports.postLogin = (req, res, next) => {
     req.logIn(user, (err) => {
       if (err) { return next(err) }
 
-      console.log(req.session)
       console.log('Success! You are logged in.');
-      res.json({ message: 'Success! You are logged in.', token: req.session });
+      res.json({ message: 'Success! You are logged in.', userID: req.session.passport.user });
     });
   })(req, res, next);
 };

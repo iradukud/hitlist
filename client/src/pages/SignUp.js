@@ -19,6 +19,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 //import use signin from react auth kit 
 import { useSignIn } from 'react-auth-kit';
+import { string } from 'prop-types';
 
 function Copyright(props) {
   return (
@@ -59,9 +60,9 @@ export default function SignUp() {
       console.log(res);
 
       signIn({
-        token: res.data.token,
+        token: res.data.userID,
         expiresIn: 1800,
-        tokenType: 'Bearer',
+        tokenType: string,
       });
 
       if (res.data.message === 'New user create') {

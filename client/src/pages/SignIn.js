@@ -18,6 +18,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 //import use signin from react auth kit 
 import { useSignIn } from 'react-auth-kit';
+import { string } from 'prop-types';
 
 
 function Copyright(props) {
@@ -52,12 +53,12 @@ export default function SignIn() {
                 password: data.get('password'),
             });
 
-            console.log(res);
-
+            console.log(res.data.userID);
+            
             signIn({
-                token: res.data.token,
+                token: res.data.userID,
                 expiresIn: 1800,
-                tokenType: 'Bearer',
+                tokenType: 'String',
             });
 
             if (res.data.message === 'Success! You are logged in.') {
