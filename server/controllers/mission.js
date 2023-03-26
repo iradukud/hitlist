@@ -6,7 +6,6 @@ module.exports = {
         console.log('New mission information has been recieved')
         console.log(req.body)
         res.send('New user created');
-        /*
         try {
             await Mission.create({
                 mission: req.body.mission,
@@ -15,14 +14,14 @@ module.exports = {
                 tasks: req.body.missionTasks.split(',').map(x => {
                     return { 'task': x.trim(), 'completed': false }
                 }),
-                userId: req.user.id
+                userId: req.session.passport.user
             })
             console.log('Mission has been added!')
-            res.redirect('/create')
+            res.json({message:'New mission created!'})
         } catch (err) {
             console.log(err)
         }
-        */
+
     },
     //Marks task in mission as completed: true in DB
     markComplete: async (req, res) => {
