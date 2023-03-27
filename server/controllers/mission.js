@@ -1,6 +1,15 @@
 const Mission = require('../models/mission')
 
 module.exports = {
+    //get all the user's missions
+    getMissions: async (req, res) => {
+        try {
+            const missionItems = await Mission.find({ userId: req.session.passport.user })
+            res.json({ missions: missionItems })
+        } catch (err) {
+            console.log(err)
+        }
+    },
     //Create a mission with tasks
     createMission: async (req, res) => {
         console.log('New mission information has been recieved')
@@ -17,7 +26,7 @@ module.exports = {
                 userId: req.session.passport.user
             })
             console.log('Mission has been added!')
-            res.json({message:'New mission created!'})
+            res.json({ message: 'New mission created!' })
         } catch (err) {
             console.log(err)
         }

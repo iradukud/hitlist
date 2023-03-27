@@ -15,23 +15,23 @@ class Missions extends React.Component {
         //Enter all mission tasks, with a comma seperating them
         task: '',
     };
-    
+
     componentDidMount = () => {
         this.getMissions();
-      };
-    
-    
-      getMissions = () => {
-        axios.get('/api')
-          .then((response) => {
-            const data = response.data;
-            this.setState({ posts: data });
-            console.log('Data has been received!!');
-          })
-          .catch(() => {
-            alert('Error retrieving data!!!');
-          });
-      }
+    };
+
+    getMissions = () => {
+        axios.get('/mission/missions')
+            .then((response) => {
+                const data = response.data.missions;
+                console.log(data)
+                this.setState({ posts: data });
+                console.log('Data has been received!!');
+            })
+            .catch(() => {
+                alert('Error retrieving data!!!');
+            });
+    }
 
     handleChange = ({ target }) => {
         const { name, value } = target;
@@ -72,9 +72,8 @@ class Missions extends React.Component {
 
 
         return missions.map((mission, index) => (
-            <div key={index} className="blog-post__display">
-                <h3>{mission.title}</h3>
-                <p>{mission.body}</p>
+            <div>
+                <h3>{mission}</h3>
             </div>
         ));
     };
