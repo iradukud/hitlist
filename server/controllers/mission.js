@@ -4,7 +4,7 @@ module.exports = {
     //get all the user's missions
     getMissions: async (req, res) => {
         try {
-            const missionItems = await Mission.find({ userId: req.session.passport.user })
+            const missionItems = await Mission.find().lean()
             res.json({ missions: missionItems })
         } catch (err) {
             console.log(err)
@@ -12,18 +12,16 @@ module.exports = {
     },
     //Create a mission with tasks
     createMission: async (req, res) => {
-        console.log('New mission information has been recieved')
         console.log(req.body)
-        res.send('New user created');
         try {
             await Mission.create({
-                mission: req.body.mission,
+                mission: req.body.missionsName,
                 date: req.body.date,
                 importance: req.body.importance,
-                tasks: req.body.missionTasks.split(',').map(x => {
+                tasks: req.body.task.split(',').map(x => {
                     return { 'task': x.trim(), 'completed': false }
                 }),
-                userId: req.session.passport.user
+                //userId: req.session.passport.user
             })
             console.log('Mission has been added!')
             res.json({ message: 'New mission created!' })

@@ -13,7 +13,8 @@ class Missions extends React.Component {
         date: '',
         importance: 0,
         //Enter all mission tasks, with a comma seperating them
-        task: '',
+        tasks: '',
+        missions: [],
     };
 
     componentDidMount = () => {
@@ -21,11 +22,12 @@ class Missions extends React.Component {
     };
 
     getMissions = () => {
-        axios.get('/mission/missions')
+        axios.get('http://localhost:2121/mission/missions')
             .then((response) => {
+                console.log(response)
                 const data = response.data.missions;
                 console.log(data)
-                this.setState({ posts: data });
+                this.setState({ missions: data });
                 console.log('Data has been received!!');
             })
             .catch(() => {
@@ -46,11 +48,11 @@ class Missions extends React.Component {
             missionsName: this.state.missionsName,
             date: this.state.date,
             importance: this.state.importance,
-            task: this.state.task,
+            tasks: this.state.tasks,
         }).then(() => {
             console.log('Data has been sent to the server');
             this.resetUserInputs();
-            //this.getBlogPost();
+            this.getMissions();
         }).catch(() => {
             console.log('Internal server error');
         });
@@ -61,20 +63,31 @@ class Missions extends React.Component {
             missionsName: '',
             date: '',
             importance: 0,
-            task: '',
-            missions: []
+            tasks: '',
         });
     };
 
     displayMissions = (missions) => {
-
         if (!missions.length) return null;
 
 
-        return missions.map((mission, index) => (
-            <div>
-                <h3>{mission}</h3>
-            </div>
+        return missions.map((mission) => (
+            <section key={mission['_id']}>
+                <h3 id={mission['_id']}>{'Mission: '}
+                    <span className={missions.importance === 1 ? "high" : missions.importance === 2 ? 'medium' : 'low'}>{mission['mission']}</span>
+                    <i className="editMission far fa-edit"></i>
+                    <i className='delMission fas fa-trash-alt'></i>
+                </h3>
+                <ul>
+                    {mission.tasks.map((task, index) => {
+                        return <li className='task' >
+                            <span className={task.task.completed === true ? ' completed' : 'not'}>{task.task}</span>
+                            <i className="editTask far fa-edit"></i>
+                            <i className='deltask far fa-trash-alt'></i>
+                        </li>
+                    })}
+                </ul>
+            </section>
         ));
     };
 
@@ -121,10 +134,10 @@ class Missions extends React.Component {
                         <div className="field d-flex justify-content-between align-items-center mb-2">
                             <label htmlFor="missionTasks">Mission tasks</label>
                             <textarea
-                                name="task"
+                                name="tasks"
                                 placeholder="Enter all mission tasks, with a comma seperating them"
                                 rows="4"
-                                value={this.state.task}
+                                value={this.state.tasks}
                                 onChange={this.handleChange}
                             />
                         </div>
