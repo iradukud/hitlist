@@ -12,13 +12,13 @@ module.exports = {
     },
     //Create a mission with tasks
     createMission: async (req, res) => {
-        console.log(req.body)
+
         try {
             await Mission.create({
                 mission: req.body.missionsName,
                 date: req.body.date,
                 importance: req.body.importance,
-                tasks: req.body.task.split(',').map(x => {
+                tasks: req.body.tasks.split(',').map(x => {
                     return { 'task': x.trim(), 'completed': false }
                 }),
                 //userId: req.session.passport.user
@@ -29,6 +29,22 @@ module.exports = {
             console.log(err)
         }
 
+    },
+    //Edits a mission name  
+    editMission: async (req, res) => {
+        console.log(req.body)
+        try {
+            await Mission.findOneAndUpdate({ _id: req.body['id'] }, {
+                mission: req.body.missionsName,
+                date: req.body.date,
+                importance: req.body.importance
+            })
+            console.log('Mission edited')
+            res.json({ message: 'Mission edited' });
+        } catch (err) {
+            console.log(err)
+            res.json({ message: 'Mission edit unsuccessful' })
+        }
     },
     //Marks task in mission as completed: true in DB
     markComplete: async (req, res) => {
@@ -86,21 +102,7 @@ module.exports = {
             console.log(err)
         }
     },
-    //Edits a mission data except the tasks  
-    editMission: async (req, res) => {
-        console.log(req.body)
-        try {
-            await Mission.findOneAndUpdate({ _id: req.body.id }, {
-                mission: req.body.mission,
-                date: req.body.date,
-                importance: req.body.importance
-            })
-            console.log('Mission edited')
-            res.redirect("/missions")
-        } catch (err) {
-            res.redirect("/missions");
-        }
-    },
+
     //Edits a the selected task in the mission  
     editTask: async (req, res) => {
         console.log(req.body)

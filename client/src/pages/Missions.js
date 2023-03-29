@@ -1,18 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 //import axios - enables communication with server
 import axios from 'axios';
 //import bootstrap 
 import 'bootstrap/dist/css/bootstrap.min.css';
 //import signout component
 import SignoutBtn from '../components/SignoutBtn'
+//
+import EditMission from '../components/EditMission'
+
+
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+
 
 class Missions extends React.Component {
     state = {
         missionsName: '',
-        //new Date().toISOString().substring(0, 10)
         date: '',
         importance: 0,
-        //Enter all mission tasks, with a comma seperating them
         tasks: '',
         missions: [],
     };
@@ -39,7 +46,6 @@ class Missions extends React.Component {
         const { name, value } = target;
         this.setState({ [name]: value });
     };
-
 
     submit = (event) => {
         event.preventDefault();
@@ -75,15 +81,18 @@ class Missions extends React.Component {
             <section key={mission['_id']}>
                 <h3 id={mission['_id']}>{'Mission: '}
                     <span className={missions.importance === 1 ? "high" : missions.importance === 2 ? 'medium' : 'low'}>{mission['mission']}</span>
-                    <i className="editMission far fa-edit"></i>
-                    <i className='delMission fas fa-trash-alt'></i>
+
+                    <EditMission missionId={mission['_id']} name={mission['mission']} date={mission['date']} importance={mission['importance']} missions={this.missions} />
+                    <FontAwesomeIcon icon={faTrash} className='delMission' />
                 </h3>
                 <ul>
                     {mission.tasks.map((task, index) => {
-                        return <li className='task' >
+                        return <li key={index} >
                             <span className={task.task.completed === true ? ' completed' : 'not'}>{task.task}</span>
-                            <i className="editTask far fa-edit"></i>
-                            <i className='deltask far fa-trash-alt'></i>
+                            {
+                                //<FontAwesomeIcon icon={faPenToSquare} className='editTask' />
+                            }
+                            <FontAwesomeIcon icon={faTrash} className='deltask' />
                         </li>
                     })}
                 </ul>
@@ -126,9 +135,9 @@ class Missions extends React.Component {
                                 onChange={this.handleChange}
                             >
                                 <option disabled defaultValue value="0">-- select an option --</option>
-                                <option value="1">High</option>
+                                <option value="1">Low</option>
                                 <option value="2">Medium</option>
-                                <option value="3">Low</option>
+                                <option value="3">High</option>
                             </select>
                         </div>
                         <div className="field d-flex justify-content-between align-items-center mb-2">
@@ -150,8 +159,6 @@ class Missions extends React.Component {
                 <div className='mt-5'>
                     {this.displayMissions(this.state.missions)}
                 </div>
-
-
 
             </div>
         )
