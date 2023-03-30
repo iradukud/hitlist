@@ -12,7 +12,6 @@ module.exports = {
     },
     //Create a mission with tasks
     createMission: async (req, res) => {
-
         try {
             await Mission.create({
                 mission: req.body.missionsName,
@@ -28,11 +27,9 @@ module.exports = {
         } catch (err) {
             console.log(err)
         }
-
     },
     //Edits a mission name  
     editMission: async (req, res) => {
-        console.log(req.body)
         try {
             await Mission.findOneAndUpdate({ _id: req.body['id'] }, {
                 mission: req.body.missionsName,
@@ -43,9 +40,20 @@ module.exports = {
             res.json({ message: 'Mission edited' });
         } catch (err) {
             console.log(err)
-            res.json({ message: 'Mission edit unsuccessful' })
         }
     },
+    //Delete the whole mission  
+    deleteMission: async (req, res) => {
+        console.log(req.params.id)
+        try {
+            await Mission.findOneAndDelete({ _id: req.params.id })
+            console.log('Deleted mission')
+            res.json({ message: 'Deleted mission' })
+        } catch (err) {
+            console.log(err)
+        }
+    },
+
     //Marks task in mission as completed: true in DB
     markComplete: async (req, res) => {
         //console.log( req.body.missionIdFromJSFile)
@@ -87,17 +95,6 @@ module.exports = {
             })
             console.log('Deleted mission task')
             res.json('Deleted It')
-        } catch (err) {
-            console.log(err)
-        }
-    },
-    //Delete the whole mission  
-    deleteMission: async (req, res) => {
-        console.log(req.body.missionIdFromJSFile)
-        try {
-            await Mission.findOneAndDelete({ _id: req.body.missionIdFromJSFile })
-            console.log('Deleted mission')
-            res.json('Deleted it')
         } catch (err) {
             console.log(err)
         }

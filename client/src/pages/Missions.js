@@ -73,17 +73,29 @@ class Missions extends React.Component {
         });
     };
 
-    displayMissions = (missions) => {
-        if (!missions.length) return null;
+    deleteMission = (missionId) => {
+        console.log(missionId)
+        axios.delete(`http://localhost:2121/mission/deleteMission/${missionId}`, {
+        }).then(() => {
+            console.log('Mission has been deleted');
+            this.getMissions();
+        }).catch(() => {
+            console.log('Mission deletion unsuccessful');
+        });
+    }
 
+    displayMissions = (missions) => {
+        if (!missions.length) {
+            return null;
+        }
 
         return missions.map((mission) => (
             <section key={mission['_id']}>
                 <h3 id={mission['_id']}>{'Mission: '}
-                    <span className={missions.importance === 1 ? "high" : missions.importance === 2 ? 'medium' : 'low'}>{mission['mission']}</span>
+                    <span className={missions.importance === 1 ? "low" : missions.importance === 2 ? 'medium' : 'high'}>{mission['mission']}</span>
 
-                    <EditMission missionId={mission['_id']} name={mission['mission']} date={mission['date']} importance={mission['importance']} missions={this.missions} />
-                    <FontAwesomeIcon icon={faTrash} className='delMission' />
+                    <EditMission missionId={mission['_id']} name={mission['mission']} date={mission['date']} importance={mission['importance']} />
+                    <FontAwesomeIcon icon={faTrash} onClick={() => this.deleteMission(mission['_id'])} />
                 </h3>
                 <ul>
                     {mission.tasks.map((task, index) => {

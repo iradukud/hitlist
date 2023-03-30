@@ -16,7 +16,8 @@ router.post('/addTask', missionsController.addTask)
 //Routes that involve mission items
 router.get('/missions', missionsController.getMissions)
 router.post('/create', missionsController.createMission)
-router.delete('/deleteMission', missionsController.deleteMission)
 router.put('/editMission', missionsController.editMission)
+router.delete('/deleteMission/:id', missionsController.deleteMission)
+
 
 module.exports = router
