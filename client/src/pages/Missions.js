@@ -7,11 +7,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import SignoutBtn from '../components/SignoutBtn'
 //
 import EditMission from '../components/EditMission'
+//
+import EditTask from '../components/EditTask'
 
 
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 
@@ -101,9 +102,8 @@ class Missions extends React.Component {
                     {mission.tasks.map((task, index) => {
                         return <li key={index} >
                             <span className={task.task.completed === true ? ' completed' : 'not'}>{task.task}</span>
-                            {
-                                //<FontAwesomeIcon icon={faPenToSquare} className='editTask' />
-                            }
+
+                            <EditTask missionId={mission['_id']} task={task.task} />
                             <FontAwesomeIcon icon={faTrash} className='deltask' />
                         </li>
                     })}
