@@ -3,7 +3,6 @@ const Mission = require('../models/mission')
 module.exports = {
     //Edits a the selected task in the mission  
     editTask: async (req, res) => {
-        console.log(req.body)
         try {
             await Mission.findOneAndUpdate({ _id: req.body.id }, {
                 $set: { 'tasks.$[i].task': req.body.task }
@@ -11,9 +10,23 @@ module.exports = {
                 arrayFilters: [{ 'i.task': req.body.oldTask }]
             })
             console.log('Task edited')
-            res.json({message:'Task edited'})
+            res.json({ message: 'Task edited' })
         } catch (err) {
             console.log('Task edit unsuccessful')
+        }
+    },
+    //Deletes a task in mission  
+    deleteTask: async (req, res) => {
+        try {
+            await Mission.findOneAndUpdate({ _id: req.params.id }, {
+                $pull: { tasks: { task: req.params.task } }
+            }, {
+                multi: true
+            })
+            console.log('Task deleted')
+            res.json({ message: 'Task deleted' })
+        } catch (err) {
+            console.log(err)
         }
     },
     //Marks task in mission as completed: true in DB
@@ -47,21 +60,6 @@ module.exports = {
             console.log(err)
         }
     },
-    //Deletes a task in mission  
-    deleteTask: async (req, res) => {
-        try {
-            await Mission.findOneAndUpdate({ _id: req.body.missionIdFromJSFile }, {
-                $pull: { tasks: { task: req.body.task } }
-            }, {
-                multi: true
-            })
-            console.log('Deleted mission task')
-            res.json('Deleted It')
-        } catch (err) {
-            console.log(err)
-        }
-    },
-
 
     //Adds a new task to the mission
     addTask: async (req, res) => {

@@ -75,8 +75,16 @@ class Missions extends React.Component {
     };
 
     deleteMission = (missionId) => {
-        console.log(missionId)
         axios.delete(`http://localhost:2121/mission/deleteMission/${missionId}`, {
+        }).then(() => {
+            console.log('Mission has been deleted');
+            this.getMissions();
+        }).catch(() => {
+            console.log('Mission deletion unsuccessful');
+        });
+    }
+    deleteTask = ([missionId,task]) => {
+        axios.delete(`http://localhost:2121/task/delete/${missionId}/${task}`, {
         }).then(() => {
             console.log('Mission has been deleted');
             this.getMissions();
@@ -104,7 +112,7 @@ class Missions extends React.Component {
                             <span className={task.task.completed === true ? ' completed' : 'not'}>{task.task}</span>
 
                             <EditTask missionId={mission['_id']} task={task.task} />
-                            <FontAwesomeIcon icon={faTrash} className='deltask' />
+                            <FontAwesomeIcon icon={faTrash} onClick={() => this.deleteTask([mission['_id'],task.task])} />
                         </li>
                     })}
                 </ul>
