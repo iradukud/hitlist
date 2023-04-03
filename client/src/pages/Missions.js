@@ -4,11 +4,13 @@ import axios from 'axios';
 //import bootstrap 
 import 'bootstrap/dist/css/bootstrap.min.css';
 //import signout component
-import SignoutBtn from '../components/SignoutBtn'
+import SignoutBtn from '../components/SignoutBtn';
 //
-import EditMission from '../components/EditMission'
+import EditMission from '../components/EditMission';
 //
-import EditTask from '../components/EditTask'
+import EditTask from '../components/EditTask';
+//
+import AddTask from '../components/AddTask';
 
 
 
@@ -83,7 +85,7 @@ class Missions extends React.Component {
             console.log('Mission deletion unsuccessful');
         });
     }
-    deleteTask = ([missionId,task]) => {
+    deleteTask = ([missionId, task]) => {
         axios.delete(`http://localhost:2121/task/delete/${missionId}/${task}`, {
         }).then(() => {
             console.log('Mission has been deleted');
@@ -112,9 +114,10 @@ class Missions extends React.Component {
                             <span className={task.task.completed === true ? ' completed' : 'not'}>{task.task}</span>
 
                             <EditTask missionId={mission['_id']} task={task.task} />
-                            <FontAwesomeIcon icon={faTrash} onClick={() => this.deleteTask([mission['_id'],task.task])} />
+                            <FontAwesomeIcon icon={faTrash} onClick={() => this.deleteTask([mission['_id'], task.task])} />
                         </li>
                     })}
+                    <AddTask missionId={mission['_id']} />
                 </ul>
             </section>
         ));

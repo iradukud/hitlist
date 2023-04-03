@@ -1,6 +1,18 @@
 const Mission = require('../models/mission')
 
 module.exports = {
+    //Adds a new task to the mission
+    addTask: async (req, res) => {
+        try {
+            await Mission.findOneAndUpdate({ _id: req.body.id }, {
+                $push: { tasks: { task: req.body.task, completed: false } }
+            })
+            console.log('Task added')
+            res.json({ message: 'Task added' })
+        } catch (err) {
+            console.log('Task addition unsuccessful')
+        }
+    },
     //Edits a the selected task in the mission  
     editTask: async (req, res) => {
         try {
@@ -61,18 +73,5 @@ module.exports = {
         }
     },
 
-    //Adds a new task to the mission
-    addTask: async (req, res) => {
-        console.log(req.body)
-        try {
-            await Mission.findOneAndUpdate({ _id: req.body.id }, {
-                $push: { tasks: { task: req.body.task, completed: false } }
-            })
-            console.log('task add')
-            res.redirect("/missions")
-        } catch (err) {
-            res.redirect("/missions");
-        }
 
-    }
 }
