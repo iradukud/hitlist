@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Mission = require('../models/mission')
 
 module.exports = {
@@ -42,36 +43,28 @@ module.exports = {
         }
     },
     //Marks task in mission as completed: true in DB
-    markComplete: async (req, res) => {
-        //console.log( req.body.missionIdFromJSFile)
-        console.log(req.body)
+    markCompletion: async (req, res) => {
         try {
-            await Mission.findOneAndUpdate({ _id: req.body.missionIdFromJSFile }, {
-                $set: { 'tasks.$[i].completed': true }
-            }, {
-                arrayFilters: [{ 'i.task': req.body.task }]
-            })
-            console.log('Marked Complete')
-            res.json('Marked complete')
+            const mission = await Mission.findById({ _id: mongoose.Types.ObjectId(req.body.id) })
+
+            if (mission['tasks'].filter((obj) => obj['task'] == req.body.task)[0]['completed']) {
+                await Mission.findOneAndUpdate({ _id: req.body.id }, {
+                    $set: { 'tasks.$[i].completed': false }
+                }, {
+                    arrayFilters: [{ 'i.task': req.body.task }]
+                })
+                console.log('Task uncompleted')
+            } else {
+                await Mission.findOneAndUpdate({ _id: req.body.id }, {
+                    $set: { 'tasks.$[i].completed': true }
+                }, {
+                    arrayFilters: [{ 'i.task': req.body.task }]
+                })
+                console.log('Task completed')
+            }
+            res.json({ message: 'Task completion status changed' })
         } catch (err) {
             console.log(err)
         }
     },
-    //Marks task in mission as completed: false in DB
-    markIncomplete: async (req, res) => {
-        console.log(req.body)
-        try {
-            await Mission.findOneAndUpdate({ _id: req.body.missionIdFromJSFile }, {
-                $set: { 'tasks.$[i].completed': false }
-            }, {
-                arrayFilters: [{ 'i.task': req.body.task }]
-            })
-            console.log('Marked Incomplete')
-            res.json('Marked Incomplete')
-        } catch (err) {
-            console.log(err)
-        }
-    },
-
-
 }

@@ -6,6 +6,6 @@ const tasksController = require('../controllers/task')
 router.put('/add', tasksController.addTask)
 router.put('/edit', tasksController.editTask)
 router.delete('/delete/:id/:task', tasksController.deleteTask)
-router.put('/markCompletion', tasksController.markComplete)
+router.put('/markCompletion', tasksController.markCompletion)
 
 module.exports = router

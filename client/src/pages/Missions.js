@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 //import axios - enables communication with server
 import axios from 'axios';
 //import bootstrap 
@@ -11,12 +11,9 @@ import EditMission from '../components/EditMission';
 import EditTask from '../components/EditTask';
 //
 import AddTask from '../components/AddTask';
-
-
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
-
+//import fontawesome icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faXmark, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 class Missions extends React.Component {
     state = {
@@ -94,6 +91,17 @@ class Missions extends React.Component {
             console.log('Mission deletion unsuccessful');
         });
     }
+    markCompletion = ([missionId, task]) => {
+        axios.put('http://localhost:2121/task/markCompletion', {
+            id: missionId,
+            task: task,
+        }).then(() => {
+            console.log('Task completion status changed');
+            this.getMissions();
+        }).catch(() => {
+            console.log('Task completion status changed unsuccessful');
+        });
+    }
 
     displayMissions = (missions) => {
         if (!missions.length) {
@@ -111,8 +119,13 @@ class Missions extends React.Component {
                 <ul>
                     {mission.tasks.map((task, index) => {
                         return <li key={index} >
-                            <span className={task.task.completed === true ? ' completed' : 'not'}>{task.task}</span>
+                            <span className={task.completed === true ? ' completed' : 'not'}>{task.task}</span>
 
+                            {
+                                task.completed ?
+                                    <FontAwesomeIcon icon={faXmark} onClick={() => this.markCompletion([mission['_id'], task.task])} />
+                                    : <FontAwesomeIcon icon={faCheck} onClick={() => this.markCompletion([mission['_id'], task.task])} />
+                            }
                             <EditTask missionId={mission['_id']} task={task.task} />
                             <FontAwesomeIcon icon={faTrash} onClick={() => this.deleteTask([mission['_id'], task.task])} />
                         </li>
