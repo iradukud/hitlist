@@ -1,6 +1,5 @@
 import './App.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
-import { useIsAuthenticated } from 'react-auth-kit';
 
 //pages
 import Home from './pages/Home';
@@ -10,8 +9,6 @@ import Missions from './pages/Missions';
 
 
 function App() {
-  const isAuthenticated = useIsAuthenticated()
-  console.log(isAuthenticated())
 
   return (
     <main>

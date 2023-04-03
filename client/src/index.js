@@ -6,24 +6,17 @@ import reportWebVitals from './reportWebVitals';
 
 //
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
-//import authprovider
-import { AuthProvider } from 'react-auth-kit';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
-    <AuthProvider
-      authType={'localstorage'}
-      authName={'_auth'}
-    >
       <BrowserRouter>
 
         <App />
 
       </BrowserRouter>
 
-    </AuthProvider>
   </React.StrictMode>
 );
 

@@ -17,9 +17,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 //import page routing w/o sending new server request
 import { Link } from 'react-router-dom';
-//import use signin from react auth kit 
-import { useSignIn } from 'react-auth-kit';
-import { string } from 'prop-types';
 
 function Copyright(props) {
   return (
@@ -37,7 +34,6 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
-  const signIn = useSignIn();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -58,12 +54,6 @@ export default function SignUp() {
       });
 
       console.log(res);
-
-      signIn({
-        token: res.data.userID,
-        expiresIn: 1800,
-        tokenType: string,
-      });
 
       if (res.data.message === 'New user create') {
         window.location = "/missions";

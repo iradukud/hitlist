@@ -16,9 +16,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 //import page routing w/o sending new server request
 import { Link } from 'react-router-dom';
-//import use signin from react auth kit 
-import { useSignIn } from 'react-auth-kit';
-import { string } from 'prop-types';
 
 
 function Copyright(props) {
@@ -37,7 +34,6 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
-    const signIn = useSignIn();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -55,12 +51,6 @@ export default function SignIn() {
 
             console.log(res.data.userID);
             
-            signIn({
-                token: res.data.userID,
-                expiresIn: 1800,
-                tokenType: 'String',
-            });
-
             if (res.data.message === 'Success! You are logged in.') {
                 window.location = "/missions";
             } else {
