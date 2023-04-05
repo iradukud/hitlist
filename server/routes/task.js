@@ -1,11 +1,13 @@
 const express = require('express')
+const { addTask, editTask, deleteTask, markCompletion } = require('../controllers/task')
+//const requireAuth = require('../middleware/requireAuth')
 const router = express.Router()
-const tasksController = require('../controllers/task')
 
-//Routes that involve task items
-router.put('/add', tasksController.addTask)
-router.put('/edit', tasksController.editTask)
-router.delete('/delete/:id/:task', tasksController.deleteTask)
-router.put('/markCompletion', tasksController.markCompletion)
+//router.use(requireAuth)
+
+router.put('/add/:id', addTask)
+router.put('/edit/:id', editTask)
+router.delete('/delete/:id/:task', deleteTask)
+router.put('/markCompletion/:id', markCompletion)
 
 module.exports = router

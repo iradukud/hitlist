@@ -1,56 +1,75 @@
-const Mission = require('../models/mission')
+const Mission = require('../models/mission');
+const mongoose = require('mongoose');
 
-module.exports = {
-    //get all the user's missions
-    getMissions: async (req, res) => {
-        try {
-            const missionItems = await Mission.find().lean()
-            res.json({ missions: missionItems })
-        } catch (err) {
-            console.log(err)
-        }
-    },
-    //Create a mission with tasks
-    createMission: async (req, res) => {
-        try {
-            await Mission.create({
-                mission: req.body.missionsName,
-                date: req.body.date,
-                importance: req.body.importance,
-                tasks: req.body.tasks.split(',').map(x => {
-                    return { 'task': x.trim(), 'completed': false }
-                }),
-                //userId: req.session.passport.user
-            })
-            console.log('Mission has been added!')
-            res.json({ message: 'New mission created!' })
-        } catch (err) {
-            console.log(err)
-        }
-    },
-    //Edits a mission name  
-    editMission: async (req, res) => {
-        try {
-            await Mission.findOneAndUpdate({ _id: req.body['id'] }, {
-                mission: req.body.missionsName,
-                date: req.body.date,
-                importance: req.body.importance
-            })
-            console.log('Mission edited')
-            res.json({ message: 'Mission edited' });
-        } catch (err) {
-            console.log(err)
-        }
-    },
-    //Delete the whole mission  
-    deleteMission: async (req, res) => {
-        console.log(req.params.idc)
-        try {
-            await Mission.findOneAndDelete({ _id: req.params.id })
-            console.log('Deleted mission')
-            res.json({ message: 'Deleted mission' })
-        } catch (err) {
-            console.log(err)
-        }
-    },
+//get all the user's missions
+const getMissions = async (req, res) => {
+    //const missions = await Mission.find({ userId: req.user._id }).sort({ date: -1 })
+    const missions = await Mission.find({}).sort({ date: -1 })
+    res.status(200).json({ missions })
 }
+
+//create new mission with tasks
+const createMission = async (req, res) => {
+    const { missionsName, date, importance, tasks } = req.body
+
+    if (!missionsName || !date || !importance || !tasks) {
+        return res.status(400).json({ error: 'Please fill in the fields' })
+    }
+
+    try {
+        const mission = await Mission.create({
+            mission: missionsName,
+            date: date,
+            importance: importance,
+            tasks: tasks.split(',').map(x => {
+                return { 'task': x.trim(), 'completed': false }
+            }),
+            //userId: req.user._id
+
+        })
+        console.log('Mission has been added!')
+        res.status(200).json({ mission })
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+}
+
+//edit mission detail  
+const editMission = async (req, res) => {
+    const { id } = req.params
+    const { missionsName, date, importance } = req.body
+
+    const mission = await Mission.findOneAndUpdate({ _id: id }, {
+        mission: missionsName,
+        date: date,
+        importance: importance
+    })
+
+    if (!mission) {
+        return res.status(400).json({ error: 'No such mission' })
+    }
+
+    console.log('Mission edited')
+    res.status(200).json({ mission })
+}
+
+//delete mission and tasks  
+const deleteMission = async (req, res) => {
+    const { id } = req.params
+    console.log(id)
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ error: 'No such mission' })
+    }
+
+    const mission = await Mission.findOneAndDelete({ _id: id })
+
+    if (!mission) {
+        return res.status(400).json({ error: 'No such mission' })
+    }
+
+    console.log('Deleted mission')
+    res.status(200).json({ mission })
+}
+
+module.exports = { getMissions, createMission, editMission, deleteMission }

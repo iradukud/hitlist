@@ -11,19 +11,15 @@ import Missions from './pages/Missions';
 function App() {
 
   return (
-    <main>
+    <BrowserRouter>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/signin' element={<SignIn />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/missions' element={<Missions />} />
       </Routes>
-    </main>
+    </BrowserRouter>
   );
 }
 
 export default App;
-
-//<RequireAuth loginPath='/signin'>
-//<Missions />
-//</RequireAuth>} />

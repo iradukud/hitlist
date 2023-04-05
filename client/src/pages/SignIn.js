@@ -44,7 +44,7 @@ export default function SignIn() {
         });
 
         try {
-            const res = await axios.post('http://localhost:2121/signin', {
+            const res = await axios.post('/signin', {
                 email: data.get('email'),
                 password: data.get('password'),
             });

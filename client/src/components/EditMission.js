@@ -15,16 +15,20 @@ function EditMission(props) {
   const submit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-
-    axios.put('http://localhost:2121/mission/editMission', {
+    
+    axios.put(`/mission/editMission/${data.get('missionsId')}`, {
       missionsName: data.get('missionsName'),
-      id: data.get('missionsId'),
       date: data.get('date'),
       importance: data.get('importance'),
-    }).then(() => {
-      console.log('Mission edit successful');
-    }).catch(() => {
-      console.log('Internal server error');
+    }, {
+      //headers: { 'Authorization': `Bearer ${user.token}` }
+    }).then((response) => {
+      console.log('Mission edited', response.data.mission);
+      //dispatch({ type: 'EDIT_MISSION', payload: response.data.mission })
+      handleClose()
+    }).catch((error) => {
+      console.log(error.response.data.error);
+      //setError(error.response.data.error);
     });
   }
 
@@ -86,7 +90,7 @@ function EditMission(props) {
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <Button type="submit" onClick={handleClose}>Submit</Button>
+            <Button type="submit">Submit</Button>
           </Modal.Footer>
         </form>
       </Modal>

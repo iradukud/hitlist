@@ -1,14 +1,17 @@
-/*  Grouped all the routes which are  
-    involve anything related to missions
-*/
 const express = require('express')
+const { getMissions,createMission,editMission,deleteMission} = require('../controllers/mission')
+//const requireAuth = require('../middleware/requireAuth')
 const router = express.Router()
-const missionsController = require('../controllers/mission')
 
-//Mission routes
-router.get('/missions', missionsController.getMissions)
-router.post('/create', missionsController.createMission)
-router.put('/editMission', missionsController.editMission)
-router.delete('/deleteMission/:id', missionsController.deleteMission)
+//router.use(requireAuth)
+
+//get all missions
+router.get('/missions', getMissions)
+//create new missions
+router.post('/create', createMission)
+//edit existing mission
+router.put('/editMission/:id', editMission)
+//delete mission
+router.delete('/deleteMission/:id', deleteMission)
 
 module.exports = router

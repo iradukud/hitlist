@@ -16,13 +16,17 @@ function AddTask(props) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    axios.put('http://localhost:2121/task/add', {
-      id: data.get('missionsId'),
+    axios.put(`/task/add/${data.get('missionsId')}`, {
       task: data.get('task'),
-    }).then(() => {
-      console.log('Task added');
-    }).catch(() => {
-      console.log('Task addition unsuccessful');
+    }, {
+      //headers: { 'Authorization': `Bearer ${user.token}` }
+    }).then((response) => {
+      console.log('task added', response.data.mission);
+      //dispatch({ type: 'EDIT_MISSION', payload: response.data.mission })
+      handleClose();
+    }).catch((error) => {
+      console.log(error.response.data.error);
+      //setError(error.response.data.error);
     });
 
   }

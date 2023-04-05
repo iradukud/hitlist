@@ -46,7 +46,7 @@ export default function SignUp() {
     });
 
     try {
-      const res = await axios.post('http://localhost:2121/signup', {
+      const res = await axios.post('/signup', {
         userName: data.get('userName'),
         email: data.get('email'),
         password: data.get('password'),

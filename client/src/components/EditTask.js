@@ -16,14 +16,18 @@ function EditTask(props) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    axios.put('http://localhost:2121/task/edit', {
-      id: data.get('missionsId'),
+    axios.put(`/task/edit/${data.get('missionsId')}`, {
       task: data.get('task'),
       oldTask: data.get('oldTask'),
-    }).then(() => {
-      console.log('Task edited');
-    }).catch(() => {
-      console.log('Task edit unsuccessful');
+    }, {
+      //headers: { 'Authorization': `Bearer ${user.token}` }
+    }).then((response) => {
+      console.log('task edited', response.data.mission);
+      //dispatch({ type: 'EDIT_MISSION', payload: response.data.mission })
+      handleClose();
+    }).catch((error) => {
+      console.log(error.response.data.error);
+      //setError(error.response.data.error);
     });
 
   }
