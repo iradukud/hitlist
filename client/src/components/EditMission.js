@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+//bootstrap
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+//axios
 import axios from 'axios';
-
+//fontawesome icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
+//context
+import { useMissionsContext } from '../hooks/useMissionsContext';
 
-function EditMission(props) {
+function EditMission({name,date,importance,missionId}) {
   const [show, setShow] = useState(false);
+  const [error, setError] = useState(null);
+  const { dispatch } = useMissionsContext();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -15,7 +21,7 @@ function EditMission(props) {
   const submit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    
+
     axios.put(`/mission/editMission/${data.get('missionsId')}`, {
       missionsName: data.get('missionsName'),
       date: data.get('date'),
@@ -24,11 +30,11 @@ function EditMission(props) {
       //headers: { 'Authorization': `Bearer ${user.token}` }
     }).then((response) => {
       console.log('Mission edited', response.data.mission);
-      //dispatch({ type: 'EDIT_MISSION', payload: response.data.mission })
+      dispatch({ type: 'EDIT_MISSION', payload: response.data.mission })
       handleClose()
     }).catch((error) => {
       console.log(error.response.data.error);
-      //setError(error.response.data.error);
+      setError(error.response.data.error);
     });
   }
 
@@ -55,7 +61,7 @@ function EditMission(props) {
                 type="text"
                 placeholder="Enter mission name"
                 name='missionsName'
-                defaultValue={props.name}
+                defaultValue={name}
               />
             </div>
 
@@ -64,13 +70,13 @@ function EditMission(props) {
               <input
                 type="date"
                 name='date'
-                defaultValue={props.date}
+                defaultValue={date}
               />
             </div>
 
             <div>
               <label htmlFor="importance">Importance level</label>
-              <select name="importance" select={props.importance}>
+              <select name="importance" select={importance}>
                 <option value="1" >Low</option>
                 <option value="2">Medium</option>
                 <option value="3">High</option>
@@ -81,7 +87,7 @@ function EditMission(props) {
               <input
                 type="hidden"
                 name='missionsId'
-                defaultValue={props.missionId}
+                defaultValue={missionId}
               />
             </div>
 
@@ -92,6 +98,7 @@ function EditMission(props) {
             </Button>
             <Button type="submit">Submit</Button>
           </Modal.Footer>
+          {error && <div className='error'>{error}</div>}
         </form>
       </Modal>
     </>

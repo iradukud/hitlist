@@ -39,7 +39,7 @@ const editMission = async (req, res) => {
     const { id } = req.params
     const { missionsName, date, importance } = req.body
 
-    const mission = await Mission.findOneAndUpdate({ _id: id }, {
+    let mission = await Mission.findOneAndUpdate({ _id: id }, {
         mission: missionsName,
         date: date,
         importance: importance
@@ -48,6 +48,8 @@ const editMission = async (req, res) => {
     if (!mission) {
         return res.status(400).json({ error: 'No such mission' })
     }
+
+    mission= await Mission.findById({ _id: id })
 
     console.log('Mission edited')
     res.status(200).json({ mission })

@@ -11,12 +11,12 @@ import EditMission from './EditMission';
 import EditTask from './EditTask';
 import AddTask from './AddTask';
 //context
+import { useMissionsContext } from '../hooks/useMissionsContext';
 //import { useAuthContext } from '../hooks/useAuthContext';
-//import { useMissionsContext } from '../hooks/useMissionsContext';
 
 const MissionDetails = ({ mission }) => {
     const [error, setError] = useState(null);
-    //const { dispatch } = useMissionsContext();
+    const { dispatch } = useMissionsContext();
     //const { user } = useAuthContext();
 
     const deleteMission = (missionId) => {
@@ -30,7 +30,7 @@ const MissionDetails = ({ mission }) => {
             //headers: { 'Authorization': `Bearer ${user.token}` }
         }).then((response) => {
             console.log('mission deleted', response.data.mission);
-            //dispatch({ type: 'DELETE_MISSION', payload: response.data })
+            dispatch({ type: 'DELETE_MISSION', payload: response.data.mission })
         }).catch((error) => {
             console.log(error.response.data.error);
             setError(error.response.data.error);
@@ -48,7 +48,7 @@ const MissionDetails = ({ mission }) => {
             //headers: { 'Authorization': `Bearer ${user.token}` }
         }).then((response) => {
             console.log('Task deleted', response.data.mission);
-            //dispatch({ type: 'EDIT_MISSION', payload: response.data.mission })
+            dispatch({ type: 'EDIT_MISSION', payload: response.data.mission })
         }).catch((error) => {
             console.log(error.response.data.error);
             setError(error.response.data.error);
@@ -67,7 +67,7 @@ const MissionDetails = ({ mission }) => {
             //headers: { 'Authorization': `Bearer ${user.token}` }
         }).then((response) => {
             console.log('Task completion status changed', response.data.mission);
-            //dispatch({ type: 'EDIT_MISSION', payload: response.data })
+            dispatch({ type: 'EDIT_MISSION', payload: response.data.mission })
         }).catch((error) => {
             console.log(error.response.data.error);
             setError(error.response.data.error);

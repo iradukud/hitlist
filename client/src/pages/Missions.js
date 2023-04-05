@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 //import axios - enables communication with server
 import axios from 'axios';
 //import bootstrap 
@@ -12,7 +12,7 @@ import { useMissionsContext } from '../hooks/useMissionsContext';
 //import { useAuthContext } from '../hooks/useAuthContext';
 
 const Missions = () => {
-    const [missions, setMission] = useState(null);
+    const { missions, dispatch } = useMissionsContext()
 
     useEffect(() => {
         const getMissions = async () => {
@@ -21,16 +21,15 @@ const Missions = () => {
                 {
                     //headers: { 'Authorization': `Bearer ${user.token}` }
                 }).then((response) => {
-                    setMission(response.data.missions)
-                    //dispatch({ type: 'SET_MISSIONS', payload: response.data.missions })
-                    console.log('Data has been received!!',response.data.missions);
+                    console.log('Data has been received!!', response.data.missions);
+                    dispatch({ type: 'SET_MISSIONS', payload: response.data.missions })
                 }).catch(() => {
                     console.log('Missions could not be retrieved');
                 })
         };
 
         getMissions();
-    }, [])
+    }, [dispatch])
 
     return (
         <div>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 //axios
 import axios from 'axios';
 //contexts
-//import { useMissionsContext } from '../hooks/useMissionsContext';
+import { useMissionsContext } from '../hooks/useMissionsContext';
 //import { useAuthContext } from '../hooks/useAuthContext';
 
 const MissionForm = () => {
@@ -12,7 +12,7 @@ const MissionForm = () => {
     const [tasks, setTasks] = useState('');
     const [error, setError] = useState(null)
 
-    //const { dispatch } = useMissionsContext()
+    const { dispatch } = useMissionsContext()
     //const { user } = useAuthContext()
 
     const handleSubmit = (event) => {
@@ -37,7 +37,7 @@ const MissionForm = () => {
             setTasks('');
             setError(null);
             console.log('New mission added', response.data.mission);
-            //dispatch({ type: 'CREATE_MISSION', payload: response.data })
+            dispatch({ type: 'CREATE_MISSION', payload: response.data.mission })
         }).catch((error) => {
             console.log(error.response.data.error);
             setError(error.response.data.error);

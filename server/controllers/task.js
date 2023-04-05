@@ -4,10 +4,13 @@ const Mission = require('../models/mission');
 //adds new task
 const addTask = async (req, res) => {
     try {
-        const mission = await Mission.findOneAndUpdate({ _id: req.params.id }, {
+        let mission = await Mission.findOneAndUpdate({ _id: req.params.id }, {
             $push: { tasks: { task: req.body.task, completed: false } }
         });
         console.log('task added');
+
+        mission = await Mission.findById({ _id: req.params.id })
+
         res.status(200).json({ mission });
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -17,12 +20,15 @@ const addTask = async (req, res) => {
 //edit task  
 const editTask = async (req, res) => {
     try {
-        const mission = await Mission.findOneAndUpdate({ _id: req.params.id }, {
+        let mission = await Mission.findOneAndUpdate({ _id: req.params.id }, {
             $set: { 'tasks.$[i].task': req.body.task }
         }, {
             arrayFilters: [{ 'i.task': req.body.oldTask }]
         });
         console.log('task edited');
+
+        mission = await Mission.findById({ _id: req.params.id })
+
         res.status(200).json({ mission });
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -32,12 +38,15 @@ const editTask = async (req, res) => {
 //delete task in mission  
 const deleteTask = async (req, res) => {
     try {
-        const mission = await Mission.findOneAndUpdate({ _id: req.params.id }, {
+        let mission = await Mission.findOneAndUpdate({ _id: req.params.id }, {
             $pull: { tasks: { task: req.params.task } }
         }, {
             multi: true
         })
         console.log('task deleted')
+
+        mission = await Mission.findById({ _id: req.params.id })
+
         res.status(200).json({ mission });
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -64,6 +73,7 @@ const markCompletion = async (req, res) => {
             })
             console.log('task marked completed')
         }
+        mission = await Mission.findById({ _id: req.params.id })
         res.status(200).json({ mission });
     } catch (error) {
         res.status(400).json({ error: error.message });

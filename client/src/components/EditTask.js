@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+//bootstrap
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+//axios
 import axios from 'axios';
-
+//fontawesome icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
+//context
+import { useMissionsContext } from '../hooks/useMissionsContext';
 
-function EditTask(props) {
+function EditTask({ task, missionId }) {
   const [show, setShow] = useState(false);
+  const [error, setError] = useState(null);
+  const { dispatch } = useMissionsContext();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -23,11 +29,11 @@ function EditTask(props) {
       //headers: { 'Authorization': `Bearer ${user.token}` }
     }).then((response) => {
       console.log('task edited', response.data.mission);
-      //dispatch({ type: 'EDIT_MISSION', payload: response.data.mission })
+      dispatch({ type: 'EDIT_MISSION', payload: response.data.mission })
       handleClose();
     }).catch((error) => {
       console.log(error.response.data.error);
-      //setError(error.response.data.error);
+      setError(error.response.data.error);
     });
 
   }
@@ -55,21 +61,21 @@ function EditTask(props) {
                 type="text"
                 placeholder="Enter mission name"
                 name='task'
-                defaultValue={props.task}
+                defaultValue={task}
               />
             </div>
             <div>
               <input
                 type="hidden"
                 name='oldTask'
-                defaultValue={props.task}
+                defaultValue={task}
               />
             </div>
             <div>
               <input
                 type="hidden"
                 name='missionsId'
-                defaultValue={props.missionId}
+                defaultValue={missionId}
               />
             </div>
 
@@ -78,8 +84,9 @@ function EditTask(props) {
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <Button type="submit" onClick={handleClose}>Submit</Button>
+            <Button type="submit" >Submit</Button>
           </Modal.Footer>
+          {error && <div className='error'>{error}</div>}
         </form>
       </Modal>
     </>

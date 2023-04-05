@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+//bootstrap
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+//axios
 import axios from 'axios';
-
+//fontawesome icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+//context
+import { useMissionsContext } from '../hooks/useMissionsContext';
 
-function AddTask(props) {
+function AddTask({ missionId }) {
   const [show, setShow] = useState(false);
+  const [error, setError] = useState(null);
+  const { dispatch } = useMissionsContext();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -22,13 +28,12 @@ function AddTask(props) {
       //headers: { 'Authorization': `Bearer ${user.token}` }
     }).then((response) => {
       console.log('task added', response.data.mission);
-      //dispatch({ type: 'EDIT_MISSION', payload: response.data.mission })
+      dispatch({ type: 'EDIT_MISSION', payload: response.data.mission })
       handleClose();
     }).catch((error) => {
       console.log(error.response.data.error);
-      //setError(error.response.data.error);
+      setError(error.response.data.error);
     });
-
   }
 
   return (
@@ -61,7 +66,7 @@ function AddTask(props) {
               <input
                 type="hidden"
                 name='missionsId'
-                defaultValue={props.missionId}
+                defaultValue={missionId}
               />
             </div>
 
@@ -70,8 +75,9 @@ function AddTask(props) {
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <Button type="submit" onClick={handleClose}>Submit</Button>
+            <Button type="submit">Submit</Button>
           </Modal.Footer>
+          {error && <div className='error'>{error}</div>}
         </form>
       </Modal>
     </>
