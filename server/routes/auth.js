@@ -1,17 +1,11 @@
-/*  Grouped all the routes which are  
-    used to generate a page
-*/
 const express = require('express')
 const router = express.Router()
-const authController = require('../controllers/auth')
-const { ensureAuth, ensureGuest } = require('../middleware/auth')
-
+const { postSignup, postLogin } = require('../controllers/auth')
 
 
 //Routes that deal with logining in
-router.post('/signup', authController.postSignup)
-router.post('/signin', authController.postLogin)
-router.get('/logout', authController.logout)
+router.post('/signup', postSignup)
+router.post('/signin', postLogin)
 
 
 module.exports = router

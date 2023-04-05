@@ -9,10 +9,11 @@ import MissionDetails from '../components/MissionDetails';
 import MissionForm from '../components/MissionForm'
 //contexts
 import { useMissionsContext } from '../hooks/useMissionsContext';
-//import { useAuthContext } from '../hooks/useAuthContext';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const Missions = () => {
-    const { missions, dispatch } = useMissionsContext()
+    const { missions, dispatch } = useMissionsContext();
+    const { user } = useAuthContext();
 
     useEffect(() => {
         const getMissions = async () => {
@@ -29,7 +30,7 @@ const Missions = () => {
         };
 
         getMissions();
-    }, [dispatch])
+    }, [dispatch,user])
 
     return (
         <div>

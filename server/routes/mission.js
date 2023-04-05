@@ -1,6 +1,6 @@
 const express = require('express')
 const { getMissions,createMission,editMission,deleteMission} = require('../controllers/mission')
-//const requireAuth = require('../middleware/requireAuth')
+const requireAuth = require('../middleware/requireAuth')
 const router = express.Router()
 
 //router.use(requireAuth)

@@ -1,22 +1,21 @@
-//imports signup component from mui
+//import page routing w/o sending new server request
+import { Link } from 'react-router-dom';
+//mui - form components
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+//import FormControlLabel from '@mui/material/FormControlLabel';
+//import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-//import axios - enables communication with server
-import axios from 'axios';
-//import page routing w/o sending new server request
-import { Link } from 'react-router-dom';
+//hooks
+import { useSignup } from '../hooks/useSignup'
 
 function Copyright(props) {
   return (
@@ -34,37 +33,17 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
+  const { signup, error, isLoading } = useSignup();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      userName: data.get('userName'),
-      email: data.get('email'),
-      password: data.get('password'),
-      confirmPassword: data.get('confirmPassword'),
-    });
 
-    try {
-      const res = await axios.post('/signup', {
-        userName: data.get('userName'),
-        email: data.get('email'),
-        password: data.get('password'),
-        confirmPassword: data.get('confirmPassword')
+    await signup(data.get('userName'), data.get('email'), data.get('password'), data.get('confirmPassword'))
+      .then(() => {
+        window.location = "/missions";
       });
 
-      console.log(res);
-
-      if (res.data.message === 'New user create') {
-        window.location = "/missions";
-      } else {
-        console.log(res.data.message);
-        window.location = "/signup";
-      };
-
-    } catch (err) {
-      console.log(err)
-    };
   };
 
   return (
@@ -139,6 +118,7 @@ export default function SignUp() {
               */}
             </Grid>
             <Button
+              disabled={isLoading}
               type="submit"
               fullWidth
               variant="contained"
@@ -146,6 +126,7 @@ export default function SignUp() {
             >
               Sign Up
             </Button>
+            {error && <div className='error'>{error}</div>}
             <Grid container justifyContent="center">
               <Grid item>
                 <Link to="/signin" variant="body2">

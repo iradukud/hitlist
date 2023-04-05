@@ -1,6 +1,6 @@
 const express = require('express')
 const { addTask, editTask, deleteTask, markCompletion } = require('../controllers/task')
-//const requireAuth = require('../middleware/requireAuth')
+const requireAuth = require('../middleware/requireAuth')
 const router = express.Router()
 
 //router.use(requireAuth)
