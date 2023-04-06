@@ -29,7 +29,7 @@ function EditTask({ task, missionId }) {
       setError('You must be logged in')
       return
     }
-    axios.put(`/task/edit/${data.get('missionsId')}`, {
+    axios.put(`https://hitlist-api.onrender.com/task/edit/${data.get('missionsId')}`, {
       task: data.get('task'),
       oldTask: data.get('oldTask'),
     }, {

@@ -14,7 +14,7 @@ export const useSignup = () => {
         setError(null)
 
 
-        await axios.post('/auth/signup', {
+        await axios.post('https://hitlist-api.onrender.com/auth/signup', {
             userName: userName,
             email: email,
             password: password,

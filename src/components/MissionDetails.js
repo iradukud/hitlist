@@ -25,7 +25,7 @@ const MissionDetails = ({ mission }) => {
             return
         }
 
-        axios.delete(`/mission/deleteMission/${missionId}`, {
+        axios.delete(`https://hitlist-api.onrender.com/mission/deleteMission/${missionId}`, {
             headers: { 'Authorization': `Bearer ${user.token}` }
         }).then((response) => {
             console.log('mission deleted', response.data.mission);
@@ -42,7 +42,7 @@ const MissionDetails = ({ mission }) => {
             return
         }
 
-        axios.delete(`/task/delete/${missionId}/${task}`, {
+        axios.delete(`https://hitlist-api.onrender.com/task/delete/${missionId}/${task}`, {
             headers: { 'Authorization': `Bearer ${user.token}` }
         }).then((response) => {
             console.log('Task deleted', response.data.mission);
@@ -59,7 +59,7 @@ const MissionDetails = ({ mission }) => {
             return
         }
 
-        axios.put(`/task/markCompletion/${missionId}`, {
+        axios.put(`https://hitlist-api.onrender.com/task/markCompletion/${missionId}`, {
             task: task,
         }, {
             headers: { 'Authorization': `Bearer ${user.token}` }

@@ -13,7 +13,7 @@ export const useLogin = () => {
         setIsLoading(true)
         setError(null)
 
-        await axios.post('/auth/signin', {
+        await axios.post('https://hitlist-api.onrender.com/auth/signin', {
             email: email,
             password: password,
         }).then(response => {

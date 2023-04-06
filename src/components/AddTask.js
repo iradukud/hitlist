@@ -30,7 +30,7 @@ function AddTask({ missionId }) {
       return
     }
 
-    axios.put(`/task/add/${data.get('missionsId')}`, {
+    axios.put(`https://hitlist-api.onrender.com/task/add/${data.get('missionsId')}`, {
       task: data.get('task'),
     }, {
       headers: { 'Authorization': `Bearer ${user.token}` }

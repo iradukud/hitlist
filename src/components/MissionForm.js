@@ -23,7 +23,7 @@ const MissionForm = () => {
             return
         }
 
-        axios.post('/mission/create', {
+        axios.post('https://hitlist-api.onrender.com/mission/create', {
             missionsName: missionName,
             date: date,
             importance: importance,

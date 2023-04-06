@@ -1,5 +1,4 @@
 {
-  "proxy": "https://hitlist-api.onrender.com",
   "name": "hitlist",
   "version": "0.1.0",
   "private": true,

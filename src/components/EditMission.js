@@ -30,7 +30,7 @@ function EditMission({ name, date, importance, missionId }) {
       return
     }
     
-    axios.put(`/mission/editMission/${data.get('missionsId')}`, {
+    axios.put(`https://hitlist-api.onrender.com/mission/editMission/${data.get('missionsId')}`, {
       missionsName: data.get('missionsName'),
       date: data.get('date'),
       importance: data.get('importance'),

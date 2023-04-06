@@ -17,7 +17,7 @@ const Missions = () => {
 
     useEffect(() => {
         const getMissions = async () => {
-            await axios.get('/mission/missions',
+            await axios.get('https://hitlist-api.onrender.com/mission/missions',
                 {
                     headers: { 'Authorization': `Bearer ${user.token}` }
                 }).then((response) => {
