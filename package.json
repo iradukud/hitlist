@@ -1,6 +1,6 @@
 {
-  "proxy": "http://localhost:2121",
-  "name": "client",
+  "proxy": "https://hitlist-api.onrender.com",
+  "name": "hitlist",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,6 +10,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@fvilers/disable-react-devtools": "^1.3.0",
     "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.13",
     "@testing-library/jest-dom": "^5.16.5",
