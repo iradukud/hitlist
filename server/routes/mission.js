@@ -3,7 +3,7 @@ const { getMissions,createMission,editMission,deleteMission} = require('../contr
 const requireAuth = require('../middleware/requireAuth')
 const router = express.Router()
 
-//router.use(requireAuth)
+router.use(requireAuth)
 
 //get all missions
 router.get('/missions', getMissions)

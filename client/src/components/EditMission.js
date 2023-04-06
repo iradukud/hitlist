@@ -9,11 +9,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 //context
 import { useMissionsContext } from '../hooks/useMissionsContext';
+import { useAuthContext } from '../hooks/useAuthContext';
 
-function EditMission({name,date,importance,missionId}) {
+function EditMission({ name, date, importance, missionId }) {
   const [show, setShow] = useState(false);
   const [error, setError] = useState(null);
+
   const { dispatch } = useMissionsContext();
+  const { user } = useAuthContext();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -21,13 +24,18 @@ function EditMission({name,date,importance,missionId}) {
   const submit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-
+    
+    if (!user) {
+      setError('You must be logged in')
+      return
+    }
+    
     axios.put(`/mission/editMission/${data.get('missionsId')}`, {
       missionsName: data.get('missionsName'),
       date: data.get('date'),
       importance: data.get('importance'),
     }, {
-      //headers: { 'Authorization': `Bearer ${user.token}` }
+      headers: { 'Authorization': `Bearer ${user.token}` }
     }).then((response) => {
       console.log('Mission edited', response.data.mission);
       dispatch({ type: 'EDIT_MISSION', payload: response.data.mission })

@@ -9,11 +9,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 //context
 import { useMissionsContext } from '../hooks/useMissionsContext';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 function AddTask({ missionId }) {
   const [show, setShow] = useState(false);
   const [error, setError] = useState(null);
+  
   const { dispatch } = useMissionsContext();
+  const { user } = useAuthContext();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -21,11 +24,16 @@ function AddTask({ missionId }) {
   const submit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    
+    if (!user) {
+      setError('You must be logged in')
+      return
+    }
 
     axios.put(`/task/add/${data.get('missionsId')}`, {
       task: data.get('task'),
     }, {
-      //headers: { 'Authorization': `Bearer ${user.token}` }
+      headers: { 'Authorization': `Bearer ${user.token}` }
     }).then((response) => {
       console.log('task added', response.data.mission);
       dispatch({ type: 'EDIT_MISSION', payload: response.data.mission })

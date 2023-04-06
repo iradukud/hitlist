@@ -12,22 +12,21 @@ import EditTask from './EditTask';
 import AddTask from './AddTask';
 //context
 import { useMissionsContext } from '../hooks/useMissionsContext';
-//import { useAuthContext } from '../hooks/useAuthContext';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const MissionDetails = ({ mission }) => {
     const [error, setError] = useState(null);
     const { dispatch } = useMissionsContext();
-    //const { user } = useAuthContext();
+    const { user } = useAuthContext();
 
     const deleteMission = (missionId) => {
-        //if (!user) {
-        //    setError('You must be logged in')
-        //    return
-        //}
+        if (!user) {
+            setError('You must be logged in')
+            return
+        }
 
         axios.delete(`/mission/deleteMission/${missionId}`, {
-        }, {
-            //headers: { 'Authorization': `Bearer ${user.token}` }
+            headers: { 'Authorization': `Bearer ${user.token}` }
         }).then((response) => {
             console.log('mission deleted', response.data.mission);
             dispatch({ type: 'DELETE_MISSION', payload: response.data.mission })
@@ -38,14 +37,13 @@ const MissionDetails = ({ mission }) => {
     }
 
     const deleteTask = ([missionId, task]) => {
-        //if (!user) {
-        //    setError('You must be logged in')
-        //    return
-        //}
+        if (!user) {
+            setError('You must be logged in')
+            return
+        }
 
         axios.delete(`/task/delete/${missionId}/${task}`, {
-        }, {
-            //headers: { 'Authorization': `Bearer ${user.token}` }
+            headers: { 'Authorization': `Bearer ${user.token}` }
         }).then((response) => {
             console.log('Task deleted', response.data.mission);
             dispatch({ type: 'EDIT_MISSION', payload: response.data.mission })
@@ -56,15 +54,15 @@ const MissionDetails = ({ mission }) => {
     }
 
     const markCompletion = ([missionId, task]) => {
-        //if (!user) {
-        //    setError('You must be logged in')
-        //    return
-        //}
+        if (!user) {
+            setError('You must be logged in')
+            return
+        }
 
         axios.put(`/task/markCompletion/${missionId}`, {
             task: task,
         }, {
-            //headers: { 'Authorization': `Bearer ${user.token}` }
+            headers: { 'Authorization': `Bearer ${user.token}` }
         }).then((response) => {
             console.log('Task completion status changed', response.data.mission);
             dispatch({ type: 'EDIT_MISSION', payload: response.data.mission })
@@ -79,7 +77,7 @@ const MissionDetails = ({ mission }) => {
             <h3 >{'Mission: '}
                 <span className={mission.importance === 1 ? "low" : mission.importance === 2 ? 'medium' : 'high'}>{mission['mission']}</span>
 
-                <EditMission missionId={mission['_id']} name={mission['mission']} date={mission['date']} importance={mission['importance']}/>
+                <EditMission missionId={mission['_id']} name={mission['mission']} date={mission['date']} importance={mission['importance']} />
                 <FontAwesomeIcon icon={faTrash} onClick={() => deleteMission(mission['_id'])} />
             </h3>
             <ul>

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import axios from 'axios';
 //contexts
 import { useMissionsContext } from '../hooks/useMissionsContext';
-//import { useAuthContext } from '../hooks/useAuthContext';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const MissionForm = () => {
     const [missionName, setMissionName] = useState('');
@@ -13,15 +13,15 @@ const MissionForm = () => {
     const [error, setError] = useState(null)
 
     const { dispatch } = useMissionsContext()
-    //const { user } = useAuthContext()
+    const { user } = useAuthContext()
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        //if (!user) {
-        //    setError('You must be logged in')
-        //    return
-        //}
+        if (!user) {
+            setError('You must be logged in')
+            return
+        }
 
         axios.post('/mission/create', {
             missionsName: missionName,
@@ -29,7 +29,7 @@ const MissionForm = () => {
             importance: importance,
             tasks: tasks,
         }, {
-            //headers: { 'Authorization': `Bearer ${user.token}` }
+            headers: { 'Authorization': `Bearer ${user.token}` }
         }).then((response) => {
             setMissionName('');
             setDate('');

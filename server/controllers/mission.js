@@ -3,8 +3,7 @@ const mongoose = require('mongoose');
 
 //get all the user's missions
 const getMissions = async (req, res) => {
-    //const missions = await Mission.find({ userId: req.user._id }).sort({ date: -1 })
-    const missions = await Mission.find({}).sort({ date: -1 })
+    const missions = await Mission.find({ userId: req.user._id }).sort({ date: -1 })
     res.status(200).json({ missions })
 }
 
@@ -24,7 +23,7 @@ const createMission = async (req, res) => {
             tasks: tasks.split(',').map(x => {
                 return { 'task': x.trim(), 'completed': false }
             }),
-            //userId: req.user._id
+            userId: req.user._id
 
         })
         console.log('Mission has been added!')
@@ -49,7 +48,7 @@ const editMission = async (req, res) => {
         return res.status(400).json({ error: 'No such mission' })
     }
 
-    mission= await Mission.findById({ _id: id })
+    mission = await Mission.findById({ _id: id })
 
     console.log('Mission edited')
     res.status(200).json({ mission })

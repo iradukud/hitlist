@@ -3,7 +3,7 @@ const { addTask, editTask, deleteTask, markCompletion } = require('../controller
 const requireAuth = require('../middleware/requireAuth')
 const router = express.Router()
 
-//router.use(requireAuth)
+router.use(requireAuth)
 
 router.put('/add/:id', addTask)
 router.put('/edit/:id', editTask)

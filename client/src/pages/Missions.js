@@ -18,9 +18,8 @@ const Missions = () => {
     useEffect(() => {
         const getMissions = async () => {
             await axios.get('/mission/missions',
-                {},
                 {
-                    //headers: { 'Authorization': `Bearer ${user.token}` }
+                    headers: { 'Authorization': `Bearer ${user.token}` }
                 }).then((response) => {
                     console.log('Data has been received!!', response.data.missions);
                     dispatch({ type: 'SET_MISSIONS', payload: response.data.missions })
