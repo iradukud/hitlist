@@ -73,28 +73,29 @@ const MissionDetails = ({ mission }) => {
     }
 
     return (
-        <div>
-            <h3 >{'Mission: '}
-                <span className={mission.importance === 1 ? "low" : mission.importance === 2 ? 'medium' : 'high'}>{mission['mission']}</span>
-
+        <div className={`col-md-4 text-center ${mission.importance === '1' ? "low" : mission.importance === '2' ? 'medium' : 'high'}`}>
+            <h3 >{`Mission: ${mission['mission']}`}
                 <EditMission missionId={mission['_id']} name={mission['mission']} date={mission['date']} importance={mission['importance']} />
                 <FontAwesomeIcon icon={faTrash} onClick={() => deleteMission(mission['_id'])} />
             </h3>
-            <ul>
+            <ul className="list-unstyled">
                 {mission.tasks.map((task, index) => {
-                    return <li key={index} >
-                        <span className={task.completed === true ? ' completed' : 'not'}>{task.task}</span>
-
-                        {
-                            task.completed ?
-                                <FontAwesomeIcon icon={faXmark} onClick={() => markCompletion([mission['_id'], task.task])} />
-                                : <FontAwesomeIcon icon={faCheck} onClick={() => markCompletion([mission['_id'], task.task])} />
-                        }
-                        <EditTask missionId={mission['_id']} task={task.task} />
-                        <FontAwesomeIcon icon={faTrash} onClick={() => deleteTask([mission['_id'], task.task])} />
+                    return <li className='d-flex justify-content-around align-items-baseline' key={index} >
+                        <div>
+                            {task.completed ? <span><s>{task.task}</s></span> : <span>{task.task}</span>}
+                        </div>
+                        <div>
+                            {
+                                task.completed ?
+                                    <FontAwesomeIcon icon={faXmark} onClick={() => markCompletion([mission['_id'], task.task])} />
+                                    : <FontAwesomeIcon icon={faCheck} onClick={() => markCompletion([mission['_id'], task.task])} />
+                            }
+                            <EditTask missionId={mission['_id']} task={task.task} />
+                            <FontAwesomeIcon icon={faTrash} onClick={() => deleteTask([mission['_id'], task.task])} />
+                        </div>
                     </li>
                 })}
-                {error && <div className='error'>{error}</div>}
+                {error && <div className='alert alert-danger'>{error}</div>}
                 <AddTask missionId={mission['_id']} />
             </ul>
         </div>

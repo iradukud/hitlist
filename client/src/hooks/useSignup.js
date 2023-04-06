@@ -14,7 +14,7 @@ export const useSignup = () => {
         setError(null)
 
 
-        await axios.post('/signup', {
+        await axios.post('/auth/signup', {
             userName: userName,
             email: email,
             password: password,

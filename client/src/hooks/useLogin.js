@@ -13,7 +13,7 @@ export const useLogin = () => {
         setIsLoading(true)
         setError(null)
 
-        await axios.post('/signin', {
+        await axios.post('/auth/signin', {
             email: email,
             password: password,
         }).then(response => {

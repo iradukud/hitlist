@@ -49,7 +49,7 @@ app.use(passport.session())
 app.use(flash())
 
 //Setup Routes For Which The Server Is Listening
-app.use('/', routes)
+app.use('/auth', routes)
 app.use('/mission', missionRoutes)
 app.use('/task', taskRoutes)
 

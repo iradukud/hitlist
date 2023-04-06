@@ -48,7 +48,7 @@ function EditMission({ name, date, importance, missionId }) {
 
   return (
     <>
-      <FontAwesomeIcon icon={faPenToSquare} onClick={handleShow} />
+      <FontAwesomeIcon className='mx-2' icon={faPenToSquare} onClick={handleShow} />
 
       <Modal
         show={show}
@@ -106,7 +106,7 @@ function EditMission({ name, date, importance, missionId }) {
             </Button>
             <Button type="submit">Submit</Button>
           </Modal.Footer>
-          {error && <div className='error'>{error}</div>}
+          {error && <div className='alert alert-danger' >{error}</div>}
         </form>
       </Modal>
     </>

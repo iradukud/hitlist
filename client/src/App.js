@@ -13,28 +13,24 @@ function App() {
   const { user } = useAuthContext()
 
   return (
-    <div>
-      <main>
-        <BrowserRouter>
-          <Routes>
-            <Route
-              path='/'
-              element={!user ? <Home /> : <Navigate to='/missions' />}
-            />
-            <Route
-              path='/signin'
-              element={!user ? <SignIn /> : <Navigate to='/missions' />}
-            />
-            <Route path='/signup' element={!user ? <SignUp /> : <Navigate to='/missions' />}
-            />
-            <Route
-              path='/missions'
-              element={user ? <Missions /> : <Navigate to='/' />}
-            />
-          </Routes>
-        </BrowserRouter>
-      </main>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path='/'
+          element={!user ? <Home /> : <Navigate to='/missions' />}
+        />
+        <Route
+          path='/signin'
+          element={!user ? <SignIn /> : <Navigate to='/missions' />}
+        />
+        <Route path='/signup' element={!user ? <SignUp /> : <Navigate to='/missions' />}
+        />
+        <Route
+          path='/missions'
+          element={user ? <Missions /> : <Navigate to='/' />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

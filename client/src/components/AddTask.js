@@ -85,7 +85,7 @@ function AddTask({ missionId }) {
             </Button>
             <Button type="submit">Submit</Button>
           </Modal.Footer>
-          {error && <div className='error'>{error}</div>}
+          {error && <div className='alert alert-danger' >{error}</div>}
         </form>
       </Modal>
     </>

@@ -16,6 +16,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 //hooks
 import { useLogin } from '../hooks/useLogin';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 function Copyright(props) {
     return (
@@ -34,6 +35,7 @@ const theme = createTheme();
 
 export default function SignIn() {
     const { login, error, isLoading } = useLogin();
+    const { user } = useAuthContext();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -41,7 +43,9 @@ export default function SignIn() {
 
         await login(data.get('email'), data.get('password'))
             .then(() => {
-                window.location = "/missions";
+                if (user) {
+                    window.location = "/missions";
+                };
             });
     };
 
@@ -99,7 +103,7 @@ export default function SignIn() {
                         >
                             Sign In
                         </Button>
-                        {error && <div className='error'>{error}</div>}
+                        {error && <div className='alert alert-danger' >{error}</div>}
                         <Grid container justifyContent="center">
                             <Grid item>
                                 <Link to="/signup" variant="body2">

@@ -29,7 +29,7 @@ const Missions = () => {
         };
 
         getMissions();
-    }, [dispatch,user])
+    }, [dispatch, user])
 
     return (
         <div>
@@ -37,7 +37,7 @@ const Missions = () => {
 
             <MissionForm />
 
-            <div className='mt-5'>
+            <div className='d-flex justify-content-center row mt-5 px-5'>
                 {missions && missions.map((mission) => (
                     <MissionDetails key={mission['_id']} mission={mission} />
                 ))}
