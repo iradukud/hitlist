@@ -1,5 +1,8 @@
-import { MissionsContext } from "../context/MissionContext"
+//import packages
 import { useContext } from "react"
+//contexts
+import { MissionsContext } from "../context/MissionContext"
+
 
 export const useMissionsContext = () => {
     const context = useContext(MissionsContext)

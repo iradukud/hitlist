@@ -1,9 +1,9 @@
+//import packages
 import { useState } from 'react';
+import axios from 'axios';
 //bootstrap
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-//axios
-import axios from 'axios';
 //fontawesome icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -14,7 +14,7 @@ import { useAuthContext } from '../hooks/useAuthContext';
 function AddTask({ missionId }) {
   const [show, setShow] = useState(false);
   const [error, setError] = useState(null);
-  
+
   const { dispatch } = useMissionsContext();
   const { user } = useAuthContext();
 
@@ -24,7 +24,7 @@ function AddTask({ missionId }) {
   const submit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    
+
     if (!user) {
       setError('You must be logged in')
       return

@@ -1,7 +1,7 @@
+//import packages
 import { useState } from 'react'
-//axios
 import axios from 'axios';
-//context
+//contexts
 import { useAuthContext } from './useAuthContext'
 
 export const useLogin = () => {

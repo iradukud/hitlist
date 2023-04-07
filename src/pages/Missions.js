@@ -1,5 +1,6 @@
+//import packages
 import { useEffect } from 'react';
-//import axios - enables communication with server
+import { Helmet } from 'react-helmet';
 import axios from 'axios';
 //import bootstrap 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -32,6 +33,11 @@ const Missions = () => {
     }, [dispatch, user])
 
     return (
+        <>
+        <Helmet>
+        <title>{'Hitlist - Mission'}</title>
+      </Helmet>
+
         <div>
             <SignoutBtn />
 
@@ -44,6 +50,7 @@ const Missions = () => {
             </div>
 
         </div>
+        </>
     )
 }
 

@@ -1,5 +1,5 @@
+//import packages
 import { useState } from 'react';
-//axios
 import axios from 'axios';
 //bootstrap 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -10,7 +10,7 @@ import { faTrash, faXmark, faCheck } from '@fortawesome/free-solid-svg-icons';
 import EditMission from './EditMission';
 import EditTask from './EditTask';
 import AddTask from './AddTask';
-//context
+//contexts
 import { useMissionsContext } from '../hooks/useMissionsContext';
 import { useAuthContext } from '../hooks/useAuthContext';
 

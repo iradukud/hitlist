@@ -1,13 +1,13 @@
+//import packages
+import axios from 'axios';
 import { useState } from 'react';
 //bootstrap
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-//axios
-import axios from 'axios';
 //fontawesome icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
-//context
+//contexts
 import { useMissionsContext } from '../hooks/useMissionsContext';
 import { useAuthContext } from '../hooks/useAuthContext';
 
