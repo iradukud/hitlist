@@ -42,7 +42,7 @@ const MissionDetails = ({ mission }) => {
             return
         }
 
-        axios.delete(`https://hitlist-api.onrender.com/task/delete/${missionId}/${task}`, {
+        axios.delete(`https://hitlist-api.onrender.com/task/delete/${missionId}/${task.trim()}`, {
             headers: { 'Authorization': `Bearer ${user.token}` }
         }).then((response) => {
             console.log('Task deleted', response.data.mission);
