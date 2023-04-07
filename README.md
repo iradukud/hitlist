@@ -14,15 +14,10 @@
 <!-- technology used -->
 # <h1 align="center">Tech used</h1>
 <div align="center">
-  <!-- mongodb icon -->
-  <a href="https://www.mongodb.com/" rel="nofollow"> 
-    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg" alt="mongodb" width="40" height="40" style="max-width: 100%;">
-  </a>
   <!-- react icon -->
   <a href="https://reactjs.org/" rel="nofollow"> 
     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40" style="max-width: 100%;"> 
   </a>
-  <br>
   <!-- html icon -->
   <a href="https://www.w3.org/html/" rel="nofollow"> 
     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40" style="max-width: 100%;"> 
