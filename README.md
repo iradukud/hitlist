@@ -82,7 +82,7 @@
 <!-- backend usage -->
 # <h1 align="center">Usage</h1>
 <p align="center">
-1. npm start<br>
+1. run 'npm start'<br>
 2. access site on assigned port number (localhost:"assigned port number")
 </p>
 
@@ -97,33 +97,35 @@
       <!-- first column -->
       <td width="33.3%">
         <!-- name w/repo link -->
-        <p align="center">
-          <a target="_blank" href="https://github.com/iradukud/iradukud/blob/main/assests/imgs/ht_demo.gif">HotTakes</a>
+         <p align="center">
+          <a target="_blank" href="https://meals-on-demand.onrender.com">Meal on Demand</a>
         </p>
         <br>
         <!-- demo w/repo link -->
-        <a target="_blank" href="">
-            <img src="https://github.com/iradukud/iradukud/blob/main/assests/imgs/ht_demo.gif" width="100%"  alt="HotTakes demo video">
+        <a target="_blank" href="https://meals-on-demand.onrender.com">
+            <img src="https://github.com/iradukud/iradukud/blob/main/assests/imgs/mod_demo.gif" width="100%"  alt="Meals on demand demo video">
         </a>
       </td>
       <!-- second column -->
       <td width="33.3%">
         <!-- name w/repo link -->
-        <a target="_blank" href=""></a>
+        <p align="center">
+          <a target="_blank" href="https://meals-on-demand.onrender.com">HotTakes</a>
+        </p>
         <br>
         <!-- demo w/repo link -->
-        <a target="_blank" href="">
-            <img src="" width="100%"  alt="">
+        <a target="_blank" href="https://meals-on-demand.onrender.com">
+            <img src="https://github.com/iradukud/iradukud/blob/main/assests/imgs/ht_demo.gif" width="100%"  alt="Hottakes demo video">
         </a>
       </td>
       <!-- third column -->
       <td width="33.3%">
         <!-- name w/repo link -->
-        <a target="_blank" href=""></a>
+        <a target="_blank" href="https://manchester-city-shuffle-puzzle.onrender.com">M.City - Shuffle Puzzle</a>
         <br>
         <!-- demo w/repo link -->
-        <a target="_blank" href="">
-            <img src="" width="100%"  alt="">
+        <a target="_blank" href="https://manchester-city-shuffle-puzzle.onrender.com">
+            <img src="https://github.com/iradukud/iradukud/raw/main/assests/imgs/mci_puzzle_demo.gif" width="100%"  alt="MCI demo video">
         </a>
       </td>
     </tr>
