@@ -98,11 +98,11 @@
       <td width="33.3%">
         <!-- name w/repo link -->
          <p align="center">
-          <a target="_blank" href="https://meals-on-demand.onrender.com">Meal on Demand</a>
+          <a target="_blank" href="https://github.com/iradukud/Meals-on-Demand">Meal on Demand</a>
         </p>
         <br>
         <!-- demo w/repo link -->
-        <a target="_blank" href="https://meals-on-demand.onrender.com">
+        <a target="_blank" href="https://github.com/iradukud/Meals-on-Demand">
             <img src="https://github.com/iradukud/iradukud/blob/main/assests/imgs/mod_demo.gif" width="100%"  alt="Meals on demand demo video">
         </a>
       </td>
@@ -110,21 +110,23 @@
       <td width="33.3%">
         <!-- name w/repo link -->
         <p align="center">
-          <a target="_blank" href="https://meals-on-demand.onrender.com">HotTakes</a>
+          <a target="_blank" href="https://github.com/iradukud/Hot-Takes">HotTakes</a>
         </p>
         <br>
         <!-- demo w/repo link -->
-        <a target="_blank" href="https://meals-on-demand.onrender.com">
+        <a target="_blank" href="https://github.com/iradukud/Hot-Takes">
             <img src="https://github.com/iradukud/iradukud/blob/main/assests/imgs/ht_demo.gif" width="100%"  alt="Hottakes demo video">
         </a>
       </td>
       <!-- third column -->
       <td width="33.3%">
         <!-- name w/repo link -->
-        <a target="_blank" href="https://manchester-city-shuffle-puzzle.onrender.com">M.City - Shuffle Puzzle</a>
+        <p align="center">
+        <a target="_blank" href="https://github.com/iradukud/Shuffle-Puzzle">M.City - Shuffle Puzzle</a>
+        </p>
         <br>
         <!-- demo w/repo link -->
-        <a target="_blank" href="https://manchester-city-shuffle-puzzle.onrender.com">
+        <a target="_blank" href="https://github.com/iradukud/Shuffle-Puzzle">
             <img src="https://github.com/iradukud/iradukud/raw/main/assests/imgs/mci_puzzle_demo.gif" width="100%"  alt="MCI demo video">
         </a>
       </td>
